@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form to Google Sheets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .item-category {
+            margin-bottom: 15px;
+        }
+
+        .item-category div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-category div input {
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        .item-category div input.quantity {
+            width: 25%;
+        }
+
+        .add-item {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-item:hover {
+            background-color: #218838;
+        }
+
+        button.submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button.submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="dataForm">
+        <label for="customerName">Customer Name</label>
+        <input type="text" id="customerName" name="customerName" required>
+
+        <label for="salesExecutive">Sales Executive</label>
+        <select id="salesExecutive" name="salesExecutive" required>
+            <option value="Executive 1">Executive 1</option>
+            <option value="Executive 2">Executive 2</option>
+            <option value="Executive 3">Executive 3</option>
+        </select>
+
+        <label>Item Category</label>
+        <div class="item-category" id="itemCategory">
+            <div>
+                <input type="text" name="item[]" placeholder="Item Name" required>
+                <input type="number" name="quantity[]" class="quantity" placeholder="Quantity" required>
+            </div>
+        </div>
+        <button type="button" class="add-item" onclick="addItem()">Add Item</button>
+
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" name="amount" required>
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+
+        <button type="submit" class="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    const googleSheetUrl = "https://script.google.com/macros/s/AKfycby-hm-FViIAxBaURG9j9KMOBITQsIhuaC0a1r4nfnVo97qF4R1aADYbMdDHXzG-7PuL/exec";
+
+    function addItem() {
+        const itemCategory = document.getElementById('itemCategory');
+        const newItem = document.createElement('div');
+
+        newItem.innerHTML = `
+            <input type="text" name="item[]" placeholder="Item Name" required>
+            <input type="number" name="quantity[]" class="quantity" placeholder="Quantity" required>
+        `;
+
+        itemCategory.appendChild(newItem);
+    }
+
+    document.getElementById('dataForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        // Transform items and quantities into structured data
+        const items = formData.getAll('item[]');
+        const quantities = formData.getAll('quantity[]');
+        data.items = items.map((item, index) => ({ item, quantity: quantities[index] }));
+
+        fetch(googleSheetUrl, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Form submitted successfully!');
+                this.reset();
+            } else {
+                alert('Failed to submit the form. Please check your Google Sheet integration.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    });
+</script>
+
+</body>
+</html>
