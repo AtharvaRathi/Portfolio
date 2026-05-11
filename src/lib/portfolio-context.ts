@@ -22,6 +22,16 @@ Location: ${portfolioData.location}
 Role: ${portfolioData.role}
 Education: ${portfolioData.education}
 
+Experience:
+${portfolioData.experience.map(e =>
+  `- ${e.title} at ${e.company} (${e.location}) | ${e.period}\n${e.bullets.map(b => `  • ${b}`).join("\n")}`
+).join("\n\n")}
+
+Certifications:
+${portfolioData.certifications.map(c =>
+  `- ${c.name} | ${c.issuer} via ${c.platform} [${c.status}]`
+).join("\n")}
+
 Projects:
 ${portfolioData.projects.map(p => `- ${p.name}: ${p.description} (Role: ${p.role}, Tech: ${p.techStack.join(", ")})`).join("\n")}
 
@@ -50,7 +60,7 @@ ${faqs.map(f => `Q: ${f.question}\nA: ${f.answer}`).join("\n\n")}
 You must return your response in JSON format exactly like this:
 {
   "answer": "your concise conversational answer here",
-  "relatedSection": "me" | "projects" | "skills" | "contact" | "resume" | null
+  "relatedSection": "me" | "projects" | "skills" | "experience" | "certifications" | "contact" | "resume" | null
 }
 Determine the best "relatedSection" based on the user's query. If no section perfectly matches, use null.
 `;

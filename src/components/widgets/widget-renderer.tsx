@@ -4,6 +4,8 @@ import { SkillsWidget } from "./skills";
 import { FunWidget } from "./fun";
 import { ContactWidget } from "./contact";
 import { ResumeWidget } from "./resume";
+import { ExperienceWidget } from "./experience";
+import { CertificationsWidget } from "./certifications";
 
 export function WidgetRenderer({ type }: { type: string }) {
   switch (type) {
@@ -13,6 +15,8 @@ export function WidgetRenderer({ type }: { type: string }) {
     case "fun": return <FunWidget />;
     case "contact": return <ContactWidget />;
     case "resume": return <ResumeWidget />;
+    case "experience": return <ExperienceWidget />;
+    case "certifications": return <CertificationsWidget />;
     default: return null;
   }
 }

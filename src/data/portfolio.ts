@@ -7,6 +7,70 @@ export const portfolioData = {
   location: "India",
   role: "Full-Stack Developer & AI Enthusiast",
   education: "3rd Year B.Tech IT",
+  experience: [
+    {
+      title: "Software Engineering Intern",
+      company: "Trueview",
+      location: "Aurangabad, Maharashtra",
+      period: "Dec 2025",
+      type: "current",
+      bullets: [
+        "Designed and implemented a Retrieval-Augmented Generation (RAG) architecture, utilizing semantic search and vector embeddings to optimize the retrieval of complex product specifications and reduce internal query resolution time.",
+        "Deployed a scalable AI backend integrated with a customized conversational interface, establishing secure API endpoints and robust data pipelines to ensure seamless user interaction and high-performance querying.",
+        "Coordinated with internal manufacturing and operational teams to align Large Language Model (LLM) capabilities with strategic business workflows, delivering an automated knowledge-sharing platform that significantly boosted team productivity."
+      ]
+    },
+    {
+      title: "Software Engineering Intern",
+      company: "Trueview",
+      location: "Aurangabad, Maharashtra",
+      period: "May 2025 – Jul 2025",
+      type: "previous",
+      bullets: [
+        "Developed a fully functional e-commerce website for the subsidiary company, enhancing product visibility and driving a 20% increase in online sales within the first quarter.",
+        "Engineered secure login systems, real-time notifications, and a scalable backend architecture using modern web technologies to ensure seamless user experience and performance.",
+        "Collaborated cross-functionally with design, business, and product teams to align technical implementation with strategic business goals, resulting in an intuitive and conversion-optimized platform."
+      ]
+    }
+  ],
+  certifications: [
+    {
+      name: "Harvard CS50: Introduction to Computer Science",
+      issuer: "Harvard University",
+      platform: "edX",
+      status: "completed"
+    },
+    {
+      name: "Y Combinator Startup School — Startup Track",
+      issuer: "Y Combinator",
+      platform: "Startup School",
+      status: "completed"
+    },
+    {
+      name: "Meta Full Stack Developer Professional Certificate",
+      issuer: "Meta",
+      platform: "Coursera",
+      status: "ongoing"
+    },
+    {
+      name: "Financial Markets",
+      issuer: "Yale University",
+      platform: "Coursera",
+      status: "completed"
+    },
+    {
+      name: "Program Management Fundamentals",
+      issuer: "Microsoft",
+      platform: "Coursera",
+      status: "completed"
+    },
+    {
+      name: "Strategy and Game Theory for Management",
+      issuer: "IIM Ahmedabad",
+      platform: "Coursera",
+      status: "completed"
+    }
+  ],
   projects: [
     {
       name: "Trueview Nexus",

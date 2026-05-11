@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 import { ChatInput } from "./chat-input";
 import { Message } from "@/app/page";
-import { Smile, Briefcase, Layers, PartyPopper, User, FileText } from "lucide-react";
+import { Smile, Briefcase, Layers, PartyPopper, User, FileText, History, Award } from "lucide-react";
 
 // Placeholder for Widget renderer
 import { WidgetRenderer } from "./widgets/widget-renderer";
@@ -20,6 +20,8 @@ const chips = [
   { name: "Me", icon: Smile, widget: "me" },
   { name: "Projects", icon: Briefcase, widget: "projects" },
   { name: "Skills", icon: Layers, widget: "skills" },
+  { name: "Experience", icon: History, widget: "experience" },
+  { name: "Certs", icon: Award, widget: "certifications" },
   { name: "Fun", icon: PartyPopper, widget: "fun" },
   { name: "Contact", icon: User, widget: "contact" },
   { name: "Resume", icon: FileText, widget: "resume" },
