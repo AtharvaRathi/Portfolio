@@ -24,7 +24,7 @@ export function ChatInput({ onAsk, isLoading, isChatMode = false }: ChatInputPro
     <motion.form 
       layoutId="chat-input"
       onSubmit={handleSubmit}
-      className="relative flex items-center shadow-sm rounded-full border border-zinc-200 bg-white/80 backdrop-blur-xl h-14 w-full transition-shadow hover:shadow-md focus-within:shadow-md focus-within:border-zinc-300"
+      className="relative flex items-center shadow-sm rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl h-14 w-full transition-all hover:shadow-md focus-within:shadow-md focus-within:border-zinc-300 dark:focus-within:border-zinc-700"
     >
       <input
         type="text"
@@ -32,7 +32,7 @@ export function ChatInput({ onAsk, isLoading, isChatMode = false }: ChatInputPro
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Ask me anything..."
         disabled={isLoading}
-        className="flex-1 bg-transparent border-none py-4 px-6 text-zinc-900 placeholder:text-zinc-500 focus:outline-none disabled:opacity-50 text-[15px]"
+        className="flex-1 bg-transparent border-none py-4 px-6 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none disabled:opacity-50 text-[15px]"
       />
       <button
         type="submit"

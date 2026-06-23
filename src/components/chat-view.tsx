@@ -45,11 +45,11 @@ export function ChatView({ messages, isLoading, onAsk }: ChatViewProps) {
         layoutId="avatar"
         className="flex items-center justify-center mb-8 shrink-0 relative z-20"
       >
-        <div className="w-16 h-16 rounded-full overflow-hidden border border-zinc-200/50 shadow-sm bg-white">
+        <div className="w-16 h-16 rounded-full overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50 shadow-sm bg-white dark:bg-zinc-900 transition-colors duration-300">
           {portfolioData.avatar ? (
             <img src={portfolioData.avatar} alt={portfolioData.name} className="w-full h-full object-cover" />
           ) : (
-            <div className="w-full h-full bg-zinc-200" />
+            <div className="w-full h-full bg-zinc-200 dark:bg-zinc-800 transition-colors duration-300" />
           )}
         </div>
       </motion.div>
@@ -72,7 +72,7 @@ export function ChatView({ messages, isLoading, onAsk }: ChatViewProps) {
                 ) : (
                   <div className="w-full">
                     {msg.content && (
-                      <div className="bg-white/80 backdrop-blur-md border border-zinc-200/60 text-zinc-800 px-5 py-4 rounded-3xl rounded-tl-sm max-w-[90%] text-[15px] shadow-sm whitespace-pre-wrap leading-relaxed">
+                      <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 text-zinc-800 dark:text-zinc-200 px-5 py-4 rounded-3xl rounded-tl-sm max-w-[90%] text-[15px] shadow-sm whitespace-pre-wrap leading-relaxed transition-colors duration-300">
                         {msg.content}
                       </div>
                     )}
@@ -92,10 +92,10 @@ export function ChatView({ messages, isLoading, onAsk }: ChatViewProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex justify-start w-full"
               >
-                <div className="bg-white/80 backdrop-blur-md border border-zinc-200/60 px-5 py-4 rounded-3xl rounded-tl-sm shadow-sm flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+                <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 px-5 py-4 rounded-3xl rounded-tl-sm shadow-sm flex items-center gap-1.5 transition-colors duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500 animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500 animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500 animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
               </motion.div>
             )}
@@ -107,7 +107,7 @@ export function ChatView({ messages, isLoading, onAsk }: ChatViewProps) {
       {/* Bottom Fixed Area */}
       <motion.div 
         layoutId="search-container"
-        className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#fafafa] via-[#fafafa]/80 to-transparent z-30"
+        className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-[#fafafa] via-[#fafafa]/80 dark:from-zinc-950 dark:via-zinc-950/80 to-transparent z-30 transition-colors duration-300"
       >
         <div className="w-full max-w-3xl mx-auto flex flex-col gap-3">
           {/* Scrollable Chips */}
@@ -116,7 +116,7 @@ export function ChatView({ messages, isLoading, onAsk }: ChatViewProps) {
               <button
                 key={chip.name}
                 onClick={() => onAsk(`Tell me about your ${chip.name.toLowerCase()}`, chip.widget)}
-                className="flex items-center gap-1.5 px-4 py-2 bg-white/60 backdrop-blur-md border border-zinc-200/60 rounded-full text-zinc-600 hover:bg-white hover:text-zinc-900 transition-colors shrink-0 text-sm shadow-sm"
+                className="flex items-center gap-1.5 px-4 py-2 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-full text-zinc-600 dark:text-zinc-400 hover:bg-white dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors shrink-0 text-sm shadow-sm"
               >
                 <chip.icon className="w-3.5 h-3.5 text-[#B7669A]" />
                 {chip.name}

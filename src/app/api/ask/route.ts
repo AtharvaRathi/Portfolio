@@ -32,9 +32,11 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error("AI Assistant Error:", error);
     const errorMessage = error?.message || String(error) || "Sorry, I couldn't process that right now. Please try again.";
+    const isRateLimit = errorMessage.includes("429") || errorMessage.includes("503") || errorMessage.toLowerCase().includes("too many requests") || errorMessage.toLowerCase().includes("quota") || errorMessage.toLowerCase().includes("high demand") || errorMessage.toLowerCase().includes("service unavailable");
+    
     return NextResponse.json(
       { error: errorMessage },
-      { status: 500 }
+      { status: isRateLimit ? 429 : 500 }
     );
   }
 }

@@ -14,8 +14,11 @@ export class GeminiProvider implements AIProvider {
     }
 
     const model = this.client.getGenerativeModel({
-      model: "gemini-flash-latest",
+      model: "gemini-2.5-flash",
       systemInstruction: systemPrompt,
+      generationConfig: {
+        responseMimeType: "application/json",
+      },
     });
 
     const prompt = `${question}\n\nReturn your response in JSON format exactly like: { "answer": "...", "relatedSection": "me" | "projects" | "skills" | "contact" | "resume" | null }`;
@@ -25,11 +28,12 @@ export class GeminiProvider implements AIProvider {
     const text = response.text();
     
     try {
-      // Sometimes Gemini wraps JSON in markdown block
-      const cleanText = text.replace(/```json/g, "").replace(/```/g, "").trim();
+      // Clean up markdown block if the model still outputs it despite responseMimeType
+      const cleanText = text.replace(/```json/gi, "").replace(/```/g, "").trim();
       return JSON.parse(cleanText) as AIResponse;
-    } catch {
-      throw new Error("Failed to parse Gemini response as JSON");
+    } catch (e) {
+      console.error("Failed to parse Gemini response. Raw text:", text, "Error:", e);
+      throw new Error("Failed to parse Gemini response as JSON. Please try again.");
     }
   }
 }

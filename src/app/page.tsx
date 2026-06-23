@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { HomeView } from "@/components/home-view";
 import { ChatView } from "@/components/chat-view";
 import { portfolioData } from "@/data/portfolio";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export interface Message {
   id: string;
@@ -38,7 +39,10 @@ export default function Home() {
         body: JSON.stringify({ question, predefinedWidget }),
       });
 
-      if (!res.ok) throw new Error("Failed");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => null);
+        throw new Error(errorData?.error || `API Error: ${res.status}`);
+      }
 
       const data = await res.json();
       
@@ -50,11 +54,39 @@ export default function Home() {
       };
 
       setMessages((prev) => [...prev, aiMessage]);
-    } catch {
+    } catch (error: unknown) {
+      const err = error as Error;
+      console.error(err);
+      
+      const isRateLimit = err.message?.includes("429") || err.message?.includes("503") || err.message?.includes("Too Many Requests") || err.message?.includes("quota") || err.message?.toLowerCase().includes("high demand") || err.message?.toLowerCase().includes("service unavailable");
+      
+      let fallbackContent = isRateLimit 
+        ? "Wow, I'm getting a lot of messages right now and hit my AI rate limit! 😅 Here is some quick info, but feel free to browse the UI or contact me directly!"
+        : "Sorry, I couldn't process that right now through the AI. Here is some quick info instead!";
+      
+      const q = question.toLowerCase();
+      let widgetToShow = predefinedWidget || null;
+
+      if (!widgetToShow) {
+        if (q.includes("project")) widgetToShow = "projects";
+        else if (q.includes("skill") || q.includes("tech") || q.includes("stack")) widgetToShow = "skills";
+        else if (q.includes("experience") || q.includes("work") || q.includes("intern")) widgetToShow = "experience";
+        else if (q.includes("contact") || q.includes("email") || q.includes("reach")) widgetToShow = "contact";
+        else if (q.includes("cert")) widgetToShow = "certifications";
+        else if (q.includes("fun") || q.includes("about") || q.includes("who")) widgetToShow = "me";
+      }
+
+      if (!widgetToShow) {
+         fallbackContent = isRateLimit 
+           ? "I'm currently experiencing high traffic and my AI has hit its rate limit (429). Please try again later, or use the buttons below to navigate my portfolio!"
+           : "Sorry, I couldn't process that right now. Please try using the quick links below!";
+      }
+
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Sorry, I couldn't process that right now.",
+        content: fallbackContent,
+        widget: widgetToShow,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -63,9 +95,14 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen flex flex-col items-center overflow-hidden w-full">
+    <main className="relative min-h-screen flex flex-col items-center overflow-hidden w-full transition-colors duration-300">
+      {/* Theme Toggle */}
+      <div className="absolute top-6 right-6 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Giant faded background text */}
-      <div className="fixed top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-[0.02] select-none text-[30vw] font-black tracking-tighter text-zinc-900 whitespace-nowrap">
+      <div className="fixed top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-[0.02] dark:opacity-[0.015] select-none text-[30vw] font-black tracking-tighter text-zinc-900 dark:text-zinc-100 whitespace-nowrap transition-colors duration-300">
         {portfolioData.nickname.toLowerCase()}
       </div>
 

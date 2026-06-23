@@ -1,12 +1,12 @@
 export const portfolioData = {
-  name: "Atharva",
+  name: "Atharva Rathi",
   nickname: "Atharva",
   tagline: "Building scalable web apps & AI systems",
   avatar: "/avatar.png",
   about: "I'm a 3rd-year B.Tech IT student specializing in full-stack web development with the MERN stack. I'm passionate about building scalable, performant web applications and integrating AI tools like RAG systems. I'm currently exploring startup ideas and looking for an exciting internship to apply my skills in a fast-paced environment.",
   location: "India",
   role: "Full-Stack Developer & AI Enthusiast",
-  education: "3rd Year B.Tech IT",
+  education: "K.J Somaiya College of Engineering, B.Tech in IT - Honours in AI",
   experience: [
     {
       title: "Software Engineering Intern",
@@ -77,6 +77,9 @@ export const portfolioData = {
       description: "An AI Chat Application featuring secure authentication and robust chat interfaces integrated with Dify API.",
       techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "SQLite"],
       role: "Full-Stack Developer",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop",
+      category: "AI Web App",
+      year: "2026",
       links: {
         github: "https://github.com/yourusername/trueview-nexus",
         live: "https://trueview-nexus.com"
@@ -87,26 +90,82 @@ export const portfolioData = {
       description: "A comprehensive multi-office coworking management system with real-time availability and Role-Based Access Control.",
       techStack: ["Next.js", "React", "Node.js", "PostgreSQL"],
       role: "Lead Developer",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+      category: "SaaS Platform",
+      year: "2025",
       links: {
         github: "https://github.com/yourusername/smartspace",
       }
     },
     {
-      name: "AI Vulnerability Scanner",
-      description: "A production-ready CLI tool for static application security testing (SAST) of Python codebases using AST parsing and LLMs.",
-      techStack: ["Python", "Pydantic", "Rich", "LLM APIs"],
+      name: "Automated AI Security & Vulnerability Scanner",
+      description: "An automated Static Application Security Testing (SAST) pipeline using AST parsing and LLMs to identify vulnerabilities and generate context-aware remediation snippets.",
+      techStack: ["Python", "LLM APIs", "Abstract Syntax Trees (AST)", "CLI"],
       role: "Security Engineer",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
+      category: "DevSecOps",
+      year: "2025",
       links: {
         github: "https://github.com/yourusername/ai-scanner"
       }
+    },
+    {
+      name: "RAG-Powered Enterprise Knowledge System",
+      description: "A custom RAG platform with semantic search and vector embeddings to streamline access to complex manufacturing specifications.",
+      techStack: ["Python", "React", "Vector Database", "LLM APIs"],
+      role: "Full-Stack Developer",
+      image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop",
+      category: "Enterprise AI",
+      year: "2025",
+      links: {}
+    },
+    {
+      name: "Fault-Tolerant Webhook Dispatch Engine",
+      description: "An asynchronous event-delivery system engineered with a reliable message-queuing architecture, exponential backoff, and automated retries.",
+      techStack: ["Go", "Redis", "Docker", "Concurrency"],
+      role: "Backend Engineer",
+      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop",
+      category: "Infrastructure",
+      year: "2024",
+      links: {}
+    },
+    {
+      name: "Trueview CRM",
+      description: "A custom sales and support CRM developed for a manufacturing company by deploying and extensively customizing the open-source EspoCRM platform.",
+      techStack: ["EspoCRM", "PHP", "MySQL"],
+      role: "Full-Stack Developer",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      category: "Enterprise Tool",
+      year: "2024",
+      links: {}
+    },
+    {
+      name: "AutoAnalyst",
+      description: "A multi-agent financial intelligence system utilizing the CrewAI framework to synthesize financial data and autonomously generate structured, actionable analytical dashboards. Deployed via Streamlit.",
+      techStack: ["Python", "CrewAI", "Streamlit", "LLMs"],
+      role: "AI Engineer",
+      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop",
+      category: "AI Agents",
+      year: "2024",
+      links: {}
+    },
+    {
+      name: "Smart Study Planner",
+      description: "A smart study planner built from the ground up featuring a complete frontend interface and a robust backend architecture, packaged with a dedicated local hosting guide.",
+      techStack: ["MongoDB", "Express.js", "React", "Node.js"],
+      role: "Full-Stack Developer",
+      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=800&auto=format&fit=crop",
+      category: "Web App",
+      year: "2023",
+      links: {}
     }
   ],
   skills: {
-    frontend: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Framer Motion"],
-    backend: ["Node.js", "Express", "Python"],
-    databases: ["MongoDB", "PostgreSQL", "SQLite"],
-    ai: ["OpenAI API", "Google Gemini", "RAG Systems", "LangChain"],
-    tools: ["Git", "Docker", "Vercel", "Linux"]
+    frontend: ["React", "Next.js", "Tailwind CSS", "JavaScript/TypeScript", "Framer Motion", "Material-UI (MUI)"],
+    backend: ["Node.js", "Express", "Python", "Go", "Java", "C++", "RESTful APIs", "Microservices"],
+    databases: ["MongoDB", "PostgreSQL", "SQLite", "Redis", "Vector DBs"],
+    ai: ["OpenAI API", "Google Gemini", "RAG Architecture", "LangChain", "AI Agents", "Computer Vision", "LLMs"],
+    tools: ["Git/GitHub", "Docker", "Vercel", "Linux", "AWS", "InfoSec"]
   },
   fun: [
     "I'm obsessed with optimizing web performance.",
@@ -115,9 +174,11 @@ export const portfolioData = {
     "Currently building tools to automate security scanning in codebases."
   ],
   contact: {
-    email: "atharva@example.com",
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
+    phone: "9370877347",
+    website: "atharvarathi.xyz",
+    email: "atharvarathi09@gmail.com",
+    github: "https://github.com/AtharvaRathi",
+    linkedin: "https://linkedin.com/in/atharvarathi",
     twitter: "https://twitter.com/yourusername",
     callToAction: "I'm currently looking for internship opportunities. Let's build something great together."
   },
