@@ -29,7 +29,7 @@ const itemVariants = {
 
 export function CertificationsWidget() {
   return (
-    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-6 shadow-sm max-w-lg w-full transition-colors duration-300">
+    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-5 sm:p-6 shadow-sm max-w-lg w-full transition-colors duration-300">
       <div className="flex items-center gap-2 mb-6">
         <div className="p-2 bg-[#B7669A]/10 rounded-xl text-[#B7669A]">
           <Award className="w-4 h-4" />

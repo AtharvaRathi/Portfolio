@@ -60,13 +60,13 @@ export function ProjectsWidget() {
             dragConstraints={{ right: 0, left: -((portfolioData.projects.length - 1) * 300) }}
             dragElastic={0.15}
             whileTap={{ cursor: "grabbing" }}
-            className="flex overflow-x-auto gap-5 pb-6 pt-2 snap-x snap-mandatory no-scrollbar px-2 cursor-grab"
+            className="flex overflow-x-auto gap-5 pb-6 pt-2 snap-x snap-mandatory no-scrollbar px-4 md:px-2 cursor-grab"
           >
             {portfolioData.projects.map((project) => (
               <motion.div
                 key={project.name}
                 variants={itemVariants}
-                className="snap-start shrink-0 w-72 h-[340px]"
+                className="snap-start shrink-0 w-[80vw] sm:w-72 h-[340px]"
               >
                 <TiltCard onClick={() => setSelectedProject(project)} className="w-full h-full group/card">
                   <motion.div

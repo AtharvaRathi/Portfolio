@@ -102,7 +102,7 @@ export default function Home() {
       </div>
 
       {/* Giant faded background text */}
-      <div className="fixed top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-[0.02] dark:opacity-[0.015] select-none text-[30vw] font-black tracking-tighter text-zinc-900 dark:text-zinc-100 whitespace-nowrap transition-colors duration-300">
+      <div className="fixed top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-[0.02] dark:opacity-[0.015] select-none text-[30vw] md:text-[25vw] font-black tracking-tighter text-zinc-900 dark:text-zinc-100 whitespace-nowrap transition-colors duration-300">
         {portfolioData.nickname.toLowerCase()}
       </div>
 

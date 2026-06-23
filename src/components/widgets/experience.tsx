@@ -38,8 +38,8 @@ const bulletContainerVariants = {
 
 export function ExperienceWidget() {
   return (
-    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-6 shadow-sm max-w-xl w-full transition-colors duration-300">
-      <div className="flex items-center gap-2 mb-6">
+    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-5 sm:p-6 shadow-sm max-w-xl w-full transition-colors duration-300">
+      <div className="flex items-center gap-2 mb-5 sm:mb-6">
         <div className="p-2 bg-[#B7669A]/10 rounded-xl text-[#B7669A]">
           <Briefcase className="w-4 h-4" />
         </div>
@@ -60,10 +60,10 @@ export function ExperienceWidget() {
                 }`}
               />
 
-              <div className="bg-zinc-50/50 dark:bg-zinc-900/50 rounded-2xl p-5 border border-zinc-100 dark:border-zinc-800/50 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 overflow-hidden">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+              <div className="bg-zinc-50/50 dark:bg-zinc-900/50 rounded-2xl p-4 sm:p-5 border border-zinc-100 dark:border-zinc-800/50 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-900 overflow-hidden">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mb-2">
                   <h4 className="text-base font-bold text-zinc-900 dark:text-zinc-100 transition-colors duration-300">{exp.title}</h4>
-                  <span className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 dark:text-zinc-400 bg-white dark:bg-zinc-950 px-2.5 py-1 rounded-full border border-zinc-200/60 dark:border-zinc-800/60 shrink-0 shadow-sm transition-colors duration-300">
+                  <span className="flex items-center w-fit gap-1.5 text-xs font-medium text-zinc-500 dark:text-zinc-400 bg-white dark:bg-zinc-950 px-2.5 py-1 rounded-full border border-zinc-200/60 dark:border-zinc-800/60 shrink-0 shadow-sm transition-colors duration-300">
                     <Calendar className="w-3.5 h-3.5" />
                     {exp.period}
                   </span>

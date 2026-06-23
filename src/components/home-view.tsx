@@ -33,11 +33,11 @@ export function HomeView({ onAsk }: HomeViewProps) {
         {portfolioData.tagline}
       </motion.p>
       
-      <motion.h1 layoutId="title" className="text-5xl md:text-[4.5rem] font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-10 text-center transition-colors duration-300">
+      <motion.h1 layoutId="title" className="text-4xl sm:text-5xl md:text-[4.5rem] font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-10 text-center transition-colors duration-300">
         I&apos;m {portfolioData.name}
       </motion.h1>
 
-      <motion.div layoutId="avatar" className="relative w-40 h-40 md:w-48 md:h-48 mb-8 z-10">
+      <motion.div layoutId="avatar" className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mb-8 z-10">
         {portfolioData.avatar ? (
           <img 
             src={portfolioData.avatar} 
@@ -65,10 +65,10 @@ export function HomeView({ onAsk }: HomeViewProps) {
           <button
             key={btn.name}
             onClick={() => onAsk(`Tell me about your ${btn.name.toLowerCase()}`, btn.widget)}
-            className="flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-28 md:h-28 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-lg border border-white/50 dark:border-zinc-800/50 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] hover:bg-white/60 dark:hover:bg-zinc-800/60 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.7)] hover:border-white/80 dark:hover:border-zinc-700 transition-all group"
+            className="flex flex-col items-center justify-center gap-2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-lg border border-white/50 dark:border-zinc-800/50 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] hover:bg-white/60 dark:hover:bg-zinc-800/60 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.7)] hover:border-white/80 dark:hover:border-zinc-700 transition-all group"
           >
             <btn.icon className="w-5 h-5 text-[#B7669A] group-hover:scale-110 transition-transform" strokeWidth={2} />
-            <span className="text-[13px] font-medium text-zinc-700 dark:text-zinc-300">{btn.name}</span>
+            <span className="text-[12px] sm:text-[13px] font-medium text-zinc-700 dark:text-zinc-300">{btn.name}</span>
           </button>
         ))}
       </motion.div>

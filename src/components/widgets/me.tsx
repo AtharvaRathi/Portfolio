@@ -6,9 +6,9 @@ import { AnimatedWidget } from "../ui/animated-widget";
 
 export function MeWidget() {
   return (
-    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-6 shadow-sm max-w-sm transition-colors duration-300">
-      <div className="flex items-center gap-4 mb-5">
-        <div className="w-16 h-16 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-white dark:border-zinc-800 shadow-sm shrink-0 transition-colors duration-300">
+    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-5 sm:p-6 shadow-sm max-w-sm transition-colors duration-300">
+      <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 mb-5">
+        <div className="w-20 h-20 sm:w-16 sm:h-16 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-white dark:border-zinc-800 shadow-sm shrink-0 transition-colors duration-300">
           {portfolioData.avatar ? (
             <img src={portfolioData.avatar} alt="Avatar" className="w-full h-full object-cover" />
           ) : (

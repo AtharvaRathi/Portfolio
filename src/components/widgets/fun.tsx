@@ -20,7 +20,7 @@ const itemVariants = {
 
 export function FunWidget() {
   return (
-    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-6 shadow-sm max-w-sm transition-colors duration-300">
+    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-5 sm:p-6 shadow-sm max-w-sm transition-colors duration-300">
       <h3 className="font-bold text-zinc-900 dark:text-zinc-100 mb-4 flex items-center gap-2 transition-colors duration-300">
         <div className="p-1.5 bg-[#B7669A]/10 rounded-lg text-[#B7669A]">
           <Sparkles className="w-4 h-4" />

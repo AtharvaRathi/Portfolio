@@ -31,10 +31,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
       {/* Modal Container */}
       <motion.div
         layoutId={`project-container-${project.name}`}
-        className="relative w-full max-w-2xl overflow-hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border border-white/20 dark:border-zinc-800/50 rounded-[2rem] shadow-2xl z-10 flex flex-col max-h-[90vh]"
+        className="relative w-full h-[100dvh] md:h-auto md:max-h-[90vh] max-w-2xl overflow-hidden bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-0 md:border border-white/20 dark:border-zinc-800/50 rounded-none md:rounded-[2rem] shadow-2xl z-10 flex flex-col"
       >
         {/* Header Image Area */}
-        <div className="relative h-72 w-full shrink-0 bg-zinc-100 dark:bg-zinc-900">
+        <div className="relative h-56 sm:h-72 w-full shrink-0 bg-zinc-100 dark:bg-zinc-900">
           {project.image && (
             <motion.img
               layoutId={`project-image-${project.name}`}
@@ -54,8 +54,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </MagneticButton>
           </div>
 
-          <div className="absolute bottom-6 left-8 right-8">
-            <div className="flex items-center gap-3 mb-2">
+          <div className="absolute bottom-6 left-6 right-6 sm:left-8 sm:right-8">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
               <motion.span 
                 layoutId={`project-category-${project.name}`}
                 className="px-3 py-1 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md rounded-full text-xs font-semibold text-[#B7669A] uppercase tracking-wider"
@@ -73,7 +73,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
             <motion.h2 
               layoutId={`project-title-${project.name}`}
-              className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 leading-tight"
+              className="text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-50 leading-tight"
             >
               {project.name}
             </motion.h2>
@@ -85,7 +85,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, type: "spring", damping: 20 }}
-          className="p-8 overflow-y-auto no-scrollbar flex flex-col gap-8"
+          className="p-6 sm:p-8 overflow-y-auto no-scrollbar flex flex-col gap-8"
         >
           {/* Kinetic Text Reveal for description */}
           <KineticText 

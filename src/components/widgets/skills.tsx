@@ -24,8 +24,8 @@ const badgeVariants = {
 
 export function SkillsWidget() {
   return (
-    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-6 shadow-sm max-w-sm transition-colors duration-300">
-      <div className="space-y-6">
+    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-5 sm:p-6 shadow-sm max-w-sm transition-colors duration-300">
+      <div className="space-y-5 sm:space-y-6">
         <div>
           <h4 className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-3">Frontend</h4>
           <motion.div variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex flex-wrap gap-2">

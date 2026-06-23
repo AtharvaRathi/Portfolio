@@ -66,13 +66,13 @@ export function ChatView({ messages, isLoading, onAsk }: ChatViewProps) {
                 className={`flex w-full ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 {msg.role === "user" ? (
-                  <div className="bg-[#B7669A] text-white px-5 py-3 rounded-2xl rounded-tr-sm max-w-[85%] text-[15px] shadow-sm">
+                  <div className="bg-[#B7669A] text-white px-5 py-3 rounded-2xl rounded-tr-sm max-w-[95%] md:max-w-[85%] text-[15px] shadow-sm">
                     {msg.content}
                   </div>
                 ) : (
                   <div className="w-full">
                     {msg.content && (
-                      <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 text-zinc-800 dark:text-zinc-200 px-5 py-4 rounded-3xl rounded-tl-sm max-w-[90%] text-[15px] shadow-sm whitespace-pre-wrap leading-relaxed transition-colors duration-300">
+                      <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 text-zinc-800 dark:text-zinc-200 px-5 py-4 rounded-3xl rounded-tl-sm max-w-[95%] md:max-w-[90%] text-[15px] shadow-sm whitespace-pre-wrap leading-relaxed transition-colors duration-300">
                         {msg.content}
                       </div>
                     )}

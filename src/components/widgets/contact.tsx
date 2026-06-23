@@ -20,11 +20,11 @@ const itemVariants = {
 
 export function ContactWidget() {
   return (
-    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-6 shadow-sm max-w-sm transition-colors duration-300">
+    <AnimatedWidget className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 rounded-[2rem] p-5 sm:p-6 shadow-sm max-w-sm transition-colors duration-300">
       <h3 className="font-bold text-zinc-900 dark:text-zinc-100 mb-2 text-lg transition-colors duration-300">Let&apos;s Connect</h3>
-      <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed transition-colors duration-300">{portfolioData.contact.callToAction}</p>
+      <p className="text-[13px] text-zinc-500 dark:text-zinc-400 mb-5 sm:mb-6 leading-relaxed transition-colors duration-300">{portfolioData.contact.callToAction}</p>
       
-      <motion.div variants={containerVariants} initial="hidden" animate="show" className="flex justify-around items-center border-t border-zinc-100 dark:border-zinc-800 pt-5 transition-colors duration-300">
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-3 sm:flex sm:justify-around items-center border-t border-zinc-100 dark:border-zinc-800 pt-5 gap-y-6 transition-colors duration-300">
         {portfolioData.contact.phone && (
           <motion.a variants={itemVariants} href={`tel:${portfolioData.contact.phone}`} className="flex flex-col items-center gap-2 text-zinc-400 dark:text-zinc-500 hover:text-[#B7669A] dark:hover:text-[#B7669A] group transition-colors">
             <Phone className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
