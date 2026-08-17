@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, ArrowUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { playClickSound } from "@/utils/sounds";
 
 interface ChatInputProps {
   onAsk: (question: string) => void;
@@ -16,6 +17,7 @@ export function ChatInput({ onAsk, isLoading, isChatMode = false }: ChatInputPro
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!query.trim() || isLoading) return;
+    playClickSound();
     onAsk(query);
     setQuery("");
   };

@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 import { ChatInput } from "./chat-input";
-import { Smile, Briefcase, Layers, PartyPopper, User, FileText, History, Award } from "lucide-react";
+import { Smile, Briefcase, Layers, PartyPopper, User, FileText, History, Award, Github } from "lucide-react";
+import { playClickSound, playHoverSound } from "@/utils/sounds";
 
 const navButtons = [
   { name: "Me", icon: Smile, widget: "me" },
@@ -11,6 +12,7 @@ const navButtons = [
   { name: "Skills", icon: Layers, widget: "skills" },
   { name: "Experience", icon: History, widget: "experience" },
   { name: "Certs", icon: Award, widget: "certifications" },
+  { name: "GitHub", icon: Github, widget: "github" },
   { name: "Fun", icon: PartyPopper, widget: "fun" },
   { name: "Contact", icon: User, widget: "contact" },
   { name: "Resume", icon: FileText, widget: "resume" },
@@ -64,7 +66,11 @@ export function HomeView({ onAsk }: HomeViewProps) {
         {navButtons.map((btn) => (
           <button
             key={btn.name}
-            onClick={() => onAsk(`Tell me about your ${btn.name.toLowerCase()}`, btn.widget)}
+            onClick={() => {
+              playClickSound();
+              onAsk(`Tell me about your ${btn.name.toLowerCase()}`, btn.widget);
+            }}
+            onMouseEnter={() => playHoverSound()}
             className="flex flex-col items-center justify-center gap-2 w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-lg border border-white/50 dark:border-zinc-800/50 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.5)] hover:bg-white/60 dark:hover:bg-zinc-800/60 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.7)] hover:border-white/80 dark:hover:border-zinc-700 transition-all group"
           >
             <btn.icon className="w-5 h-5 text-[#B7669A] group-hover:scale-110 transition-transform" strokeWidth={2} />

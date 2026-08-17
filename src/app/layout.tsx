@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { GeistSans } from 'geist/font/sans';
 import { ThemeProvider } from "@/components/theme-provider";
+import { SmoothScroll } from "@/components/smooth-scroll";
+import { CanvasBackground } from "@/components/canvas-background";
+import { CustomCursor } from "@/components/custom-cursor";
+import { ToolingProvider } from "@/components/tooling-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,11 +26,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          {/* Vignette effect */}
-          <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-            <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(183,102,154,0.15)] dark:shadow-[inset_0_0_100px_rgba(183,102,154,0.05)] rounded-[30px] sm:rounded-[50px] m-2 sm:m-4 border border-zinc-200/50 dark:border-zinc-800/50" />
-          </div>
-          {children}
+          <ToolingProvider>
+            <CustomCursor />
+            <SmoothScroll>
+            {/* 3D Canvas Background */}
+            <CanvasBackground />
+            
+            {/* Vignette effect */}
+            <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
+              <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(183,102,154,0.15)] dark:shadow-[inset_0_0_100px_rgba(183,102,154,0.05)] rounded-[30px] sm:rounded-[50px] m-2 sm:m-4 border border-zinc-200/50 dark:border-zinc-800/50" />
+            </div>
+            {children}
+            </SmoothScroll>
+          </ToolingProvider>
         </ThemeProvider>
       </body>
     </html>
