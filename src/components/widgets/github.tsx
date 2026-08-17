@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatedWidget } from "@/components/ui/animated-widget";
-import { Github, Star } from "lucide-react";
+import { GitBranch, Star } from "lucide-react";
 
 export function GitHubWidget() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -24,7 +24,7 @@ export function GitHubWidget() {
       <div className="flex items-center justify-between mb-6">
         <h3 className="font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2 text-lg">
           <div className="p-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-zinc-900 dark:text-zinc-100">
-            <Github className="w-5 h-5" />
+            <GitBranch className="w-5 h-5" />
           </div>
           Live GitHub Stats
         </h3>

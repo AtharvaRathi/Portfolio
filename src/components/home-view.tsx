@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 import { ChatInput } from "./chat-input";
-import { Smile, Briefcase, Layers, PartyPopper, User, FileText, History, Award, Github } from "lucide-react";
+import { Smile, Briefcase, Layers, PartyPopper, User, FileText, History, Award, GitBranch } from "lucide-react";
 import { playClickSound, playHoverSound } from "@/utils/sounds";
 
 const navButtons = [
@@ -12,7 +12,7 @@ const navButtons = [
   { name: "Skills", icon: Layers, widget: "skills" },
   { name: "Experience", icon: History, widget: "experience" },
   { name: "Certs", icon: Award, widget: "certifications" },
-  { name: "GitHub", icon: Github, widget: "github" },
+  { name: "GitHub", icon: GitBranch, widget: "github" },
   { name: "Fun", icon: PartyPopper, widget: "fun" },
   { name: "Contact", icon: User, widget: "contact" },
   { name: "Resume", icon: FileText, widget: "resume" },
