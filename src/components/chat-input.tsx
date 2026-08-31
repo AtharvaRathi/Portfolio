@@ -11,11 +11,26 @@ interface ChatInputProps {
   isChatMode?: boolean;
 }
 
-// Extend Window type to include webkit speech recognition
+// Self-contained Speech Recognition types (avoids lib dependency issues)
+interface ISpeechRecognitionEvent {
+  results: { [index: number]: { [index: number]: { transcript: string } } };
+}
+
+interface ISpeechRecognition {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  start: () => void;
+  stop: () => void;
+  onresult: ((event: ISpeechRecognitionEvent) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+}
+
 declare global {
   interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
+    SpeechRecognition: new () => ISpeechRecognition;
+    webkitSpeechRecognition: new () => ISpeechRecognition;
   }
 }
 
@@ -23,7 +38,7 @@ export function ChatInput({ onAsk, isLoading, isChatMode = false }: ChatInputPro
   const [query, setQuery] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
-  const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
+  const [recognition, setRecognition] = useState<ISpeechRecognition | null>(null);
 
   useEffect(() => {
     const SpeechRecognitionAPI =
@@ -35,8 +50,10 @@ export function ChatInput({ onAsk, isLoading, isChatMode = false }: ChatInputPro
       rec.interimResults = true;
       rec.lang = "en-US";
 
-      rec.onresult = (event: SpeechRecognitionEvent) => {
-        const transcript = Array.from(event.results)
+      rec.onresult = (event: ISpeechRecognitionEvent) => {
+        const transcript = Array.from(
+          Object.values(event.results) as Array<{ [index: number]: { transcript: string } }>
+        )
           .map((r) => r[0].transcript)
           .join("");
         setQuery(transcript);
