@@ -1,68 +1,187 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useState, useCallback } from "react";
+import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+
+type CursorState = "default" | "hover-btn" | "hover-link" | "hover-input" | "click";
 
 export function CustomCursor() {
-  const [isHovering, setIsHovering] = useState(false);
+  const [cursorState, setCursorState] = useState<CursorState>("default");
   const [isVisible, setIsVisible] = useState(false);
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
+  const [isSnapping, setIsSnapping] = useState(false);
 
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  const mouseX = useMotionValue(-200);
+  const mouseY = useMotionValue(-200);
+
+  const dotX = useSpring(mouseX, { damping: 30, stiffness: 500, mass: 0.3 });
+  const dotY = useSpring(mouseY, { damping: 30, stiffness: 500, mass: 0.3 });
+
+  const snapX = useMotionValue(-200);
+  const snapY = useMotionValue(-200);
+  const snapW = useMotionValue(32);
+  const snapH = useMotionValue(32);
+  const snapBR = useMotionValue(16);
+
+  const snapXSpring = useSpring(snapX, { damping: 22, stiffness: 300 });
+  const snapYSpring = useSpring(snapY, { damping: 22, stiffness: 300 });
+  const snapWSpring = useSpring(snapW, { damping: 22, stiffness: 300 });
+  const snapHSpring = useSpring(snapH, { damping: 22, stiffness: 300 });
+  const snapBRSpring = useSpring(snapBR, { damping: 22, stiffness: 300 });
+
+  const snapToElement = useCallback((el: HTMLElement) => {
+    const rect = el.getBoundingClientRect();
+    const style = window.getComputedStyle(el);
+    const br = parseFloat(style.borderRadius) || 8;
+    setIsSnapping(true);
+    snapX.set(rect.left - 4);
+    snapY.set(rect.top - 4);
+    snapW.set(rect.width + 8);
+    snapH.set(rect.height + 8);
+    snapBR.set(Math.min(br + 6, 9999));
+  }, [snapX, snapY, snapW, snapH, snapBR]);
+
+  const resetSnap = useCallback(() => {
+    setIsSnapping(false);
+    snapW.set(32);
+    snapH.set(32);
+    snapBR.set(16);
+  }, [snapW, snapH, snapBR]);
 
   useEffect(() => {
-    // Hide custom cursor on touch devices
-    if ('ontouchstart' in window) return;
+    if (typeof window === "undefined") return;
+    if ("ontouchstart" in window) return;
 
-    const moveCursor = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
-    };
+      mouseX.set(e.clientX - 16);
+      mouseY.set(e.clientY - 16);
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName.toLowerCase() === "button" ||
-        target.tagName.toLowerCase() === "a" ||
-        target.closest("button") ||
-        target.closest("a") ||
-        target.closest("input")
-      ) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
+      if (!isSnapping) {
+        snapX.set(e.clientX - 16);
+        snapY.set(e.clientY - 16);
+      }
+
+      const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement;
+      if (target) {
+        const interactive = target.closest("button, a, input, textarea, select, [role='button']") as HTMLElement;
+        if (interactive && isSnapping) {
+          const rect = interactive.getBoundingClientRect();
+          const style = window.getComputedStyle(interactive);
+          const br = parseFloat(style.borderRadius) || 8;
+          snapX.set(rect.left - 4);
+          snapY.set(rect.top - 4);
+          snapW.set(rect.width + 8);
+          snapH.set(rect.height + 8);
+          snapBR.set(Math.min(br + 6, 9999));
+        }
       }
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const interactive = target.closest("button, a, input, textarea, select, [role='button']") as HTMLElement;
+      if (interactive) {
+        const tag = interactive.tagName.toLowerCase();
+        if (tag === "a") setCursorState("hover-link");
+        else if (tag === "input" || tag === "textarea") setCursorState("hover-input");
+        else setCursorState("hover-btn");
+        snapToElement(interactive);
+      } else {
+        setCursorState("default");
+        resetSnap();
+      }
+    };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
-    document.documentElement.addEventListener("mouseleave", handleMouseLeave);
-    document.documentElement.addEventListener("mouseenter", () => setIsVisible(true));
+    const onLeave = () => { setIsVisible(false); setCursorState("default"); resetSnap(); };
+    const onEnter = () => setIsVisible(true);
+    const onDown = () => setCursorState("click");
+    const onUp = () => {
+      const target = document.elementFromPoint(
+        mouseX.get() + 16,
+        mouseY.get() + 16
+      ) as HTMLElement;
+      const interactive = target?.closest("button, a, input") as HTMLElement;
+      setCursorState(interactive ? "hover-btn" : "default");
+    };
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
+    document.documentElement.addEventListener("mouseleave", onLeave);
+    document.documentElement.addEventListener("mouseenter", onEnter);
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleMouseOver);
-      document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover", onOver);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
+      document.documentElement.removeEventListener("mouseleave", onLeave);
+      document.documentElement.removeEventListener("mouseenter", onEnter);
     };
-  }, [cursorX, cursorY, isVisible]);
-
-  if (!isVisible) return null;
+  }, [isVisible, isSnapping, mouseX, mouseY, snapX, snapY, snapW, snapH, snapBR, snapToElement, resetSnap]);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[100] mix-blend-difference bg-white hidden md:block"
-      style={{
-        x: cursorXSpring,
-        y: cursorYSpring,
-        scale: isHovering ? 2.5 : 1,
-      }}
-      transition={{ scale: { type: "spring", stiffness: 300, damping: 20 } }}
-    />
+    <>
+      {/* Hide native cursor */}
+      <style>{`* { cursor: none !important; }`}</style>
+
+      <AnimatePresence>
+        {isVisible && (
+          <>
+            {/* Morphing highlight blob that snaps to elements */}
+            <motion.div
+              className="fixed top-0 left-0 pointer-events-none z-[9998] hidden md:block"
+              style={{
+                x: snapXSpring,
+                y: snapYSpring,
+                width: snapWSpring,
+                height: snapHSpring,
+                borderRadius: snapBRSpring,
+              }}
+            >
+              <motion.div
+                className="w-full h-full"
+                animate={{
+                  backgroundColor: cursorState === "click"
+                    ? "rgba(183,102,154,0.3)"
+                    : isSnapping
+                    ? "rgba(183,102,154,0.1)"
+                    : "transparent",
+                  borderWidth: isSnapping ? 2 : 0,
+                  borderStyle: "solid",
+                  borderColor: isSnapping
+                    ? cursorState === "hover-input"
+                      ? "rgba(183,102,154,0.7)"
+                      : "rgba(183,102,154,0.3)"
+                    : "transparent",
+                  scale: cursorState === "click" ? 0.95 : 1,
+                }}
+                transition={{ duration: 0.12 }}
+                style={{ borderRadius: "inherit" }}
+              />
+            </motion.div>
+
+            {/* Trailing precision dot */}
+            <motion.div
+              className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
+              style={{ x: dotX, y: dotY, width: 32, height: 32 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#B7669A] transition-all duration-150"
+                style={{
+                  width: isSnapping ? 3 : 7,
+                  height: isSnapping ? 3 : 7,
+                  opacity: isSnapping ? 0.4 : 0.9,
+                }}
+              />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

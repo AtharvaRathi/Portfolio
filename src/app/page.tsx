@@ -96,8 +96,20 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen flex flex-col items-center overflow-hidden w-full transition-colors duration-300">
-      {/* Theme Toggle */}
-      <div className="absolute top-6 right-6 z-50">
+      {/* Top-right controls */}
+      <div className="absolute top-6 right-6 z-50 flex items-center gap-3">
+        {/* CMD+K hint */}
+        <button
+          onClick={() => {
+            const e = new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true });
+            document.dispatchEvent(e);
+          }}
+          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 transition-all shadow-sm"
+          title="Open command palette"
+        >
+          <span className="hidden md:inline">Search or run commands</span>
+          <kbd className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-mono text-[10px] border border-zinc-200 dark:border-zinc-700">⌘K</kbd>
+        </button>
         <ThemeToggle />
       </div>
 
