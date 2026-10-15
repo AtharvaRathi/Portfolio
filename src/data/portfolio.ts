@@ -117,7 +117,9 @@ export const portfolioData = {
       image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop",
       category: "Enterprise AI",
       year: "2025",
-      links: {}
+      links: {
+        github: "https://github.com/AtharvaRathi/Adaptive-Corrective-Slef-Reflective-RAG"
+      }
     },
     {
       name: "Fault-Tolerant Webhook Dispatch Engine",
@@ -127,7 +129,9 @@ export const portfolioData = {
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop",
       category: "Infrastructure",
       year: "2024",
-      links: {}
+      links: {
+        github: "https://github.com/AtharvaRathi/Fault-Tolerant-Webhook-Dispatch-Engine"
+      }
     },
     {
       name: "Trueview CRM",
@@ -175,7 +179,7 @@ export const portfolioData = {
   ],
   contact: {
     phone: "9370877347",
-    website: "atharvarathi.xyz",
+    website: "atharvarathi.com",
     email: "atharvarathi09@gmail.com",
     github: "https://github.com/AtharvaRathi",
     linkedin: "https://linkedin.com/in/atharvarathi",
