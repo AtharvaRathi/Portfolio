@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { portfolioData } from "@/data/portfolio";
 import { Command } from "cmdk";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
@@ -61,10 +62,10 @@ export function CommandPalette({ onOpenTerminal }: { onOpenTerminal: () => void 
                 <Command.Item onSelect={() => runCommand(onOpenTerminal)} onMouseEnter={playHoverSound} className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-900 aria-selected:text-zinc-900 dark:aria-selected:text-zinc-100 text-zinc-600 dark:text-zinc-400">
                   <Terminal className="w-4 h-4" /> Open Hacker Terminal
                 </Command.Item>
-                <Command.Item onSelect={() => runCommand(() => window.open('mailto:me@example.com'))} onMouseEnter={playHoverSound} className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-900 aria-selected:text-zinc-900 dark:aria-selected:text-zinc-100 text-zinc-600 dark:text-zinc-400">
+                <Command.Item onSelect={() => runCommand(() => window.open(`mailto:${portfolioData.contact.email}`))} onMouseEnter={playHoverSound} className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-900 aria-selected:text-zinc-900 dark:aria-selected:text-zinc-100 text-zinc-600 dark:text-zinc-400">
                   <Mail className="w-4 h-4" /> Send Email
                 </Command.Item>
-                <Command.Item onSelect={() => runCommand(() => window.open('/resume.pdf'))} onMouseEnter={playHoverSound} className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-900 aria-selected:text-zinc-900 dark:aria-selected:text-zinc-100 text-zinc-600 dark:text-zinc-400">
+                <Command.Item onSelect={() => runCommand(() => window.open(portfolioData.resume.downloadLink))} onMouseEnter={playHoverSound} className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer aria-selected:bg-zinc-100 dark:aria-selected:bg-zinc-900 aria-selected:text-zinc-900 dark:aria-selected:text-zinc-100 text-zinc-600 dark:text-zinc-400">
                   <Download className="w-4 h-4" /> Download Resume
                 </Command.Item>
               </Command.Group>

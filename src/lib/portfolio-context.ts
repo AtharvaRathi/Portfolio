@@ -24,7 +24,7 @@ Education: ${portfolioData.education}
 
 Experience:
 ${portfolioData.experience.map(e =>
-  `- ${e.title} at ${e.company} (${e.location}) | ${e.period}\n${e.bullets.map(b => `  • ${b}`).join("\n")}`
+  `- ${e.title} at ${e.company} ${e.location ? `(${e.location})` : ""} | ${e.period}\n${e.bullets.map(b => `  • ${b}`).join("\n")}`
 ).join("\n\n")}
 
 Certifications:
@@ -33,7 +33,7 @@ ${portfolioData.certifications.map(c =>
 ).join("\n")}
 
 Projects:
-${portfolioData.projects.map(p => `- ${p.name}: ${p.description} (Role: ${p.role}, Tech: ${p.techStack.join(", ")})`).join("\n")}
+${portfolioData.projects.map(p => `- ${p.name}: ${p.description} (Role: ${p.role}, Tech: ${p.techStack.join(", ")}) | Links: ${Object.values(p.links).join(", ")}`).join("\n")}
 
 Skills:
 - Frontend: ${portfolioData.skills.frontend.join(", ")}
@@ -46,12 +46,16 @@ Fun Facts:
 ${portfolioData.fun.map(f => `- ${f}`).join("\n")}
 
 Contact Info:
+Website: https://${portfolioData.contact.website}
+Phone: ${portfolioData.contact.phone}
 Email: ${portfolioData.contact.email}
 GitHub: ${portfolioData.contact.github}
 LinkedIn: ${portfolioData.contact.linkedin}
 
 Resume Summary:
 ${portfolioData.resume.summary}
+Resume: https://${portfolioData.contact.website}${portfolioData.resume.downloadLink}
+Availability: ${portfolioData.contact.callToAction}
 
 Common FAQs:
 ${faqs.map(f => `Q: ${f.question}\nA: ${f.answer}`).join("\n\n")}

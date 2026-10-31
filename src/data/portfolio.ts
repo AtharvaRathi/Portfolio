@@ -1,194 +1,418 @@
+// Content reviewed against the supplied résumé and public GitHub repositories on 2026-10-31.
+// See docs/content-audit.md for sources and unresolved evidence gaps.
 export const portfolioData = {
-  name: "Atharva Rathi",
-  nickname: "Atharva",
-  tagline: "Building scalable web apps & AI systems",
-  avatar: "/avatar.png",
-  about: "I'm a 3rd-year B.Tech IT student specializing in full-stack web development with the MERN stack. I'm passionate about building scalable, performant web applications and integrating AI tools like RAG systems. I'm currently exploring startup ideas and looking for an exciting internship to apply my skills in a fast-paced environment.",
-  location: "India",
-  role: "Full-Stack Developer & AI Enthusiast",
-  education: "K.J Somaiya College of Engineering, B.Tech in IT - Honours in AI",
-  experience: [
+  "name": "Atharva Rathi",
+  "nickname": "Atharva",
+  "tagline": "Building AI systems, reliable backends & data pipelines",
+  "avatar": "/avatar.png",
+  "about": "I'm an Information Technology engineering student at K.J. Somaiya College of Engineering, pursuing a B.Tech with Honours in Artificial Intelligence. Based in Mumbai, I build real-time vision-language engines, edge-to-cloud video analytics, reliable backend systems, and full-stack applications. My experience spans automated document ingestion at EmerTech Innovations, enterprise RAG at Trueview, and e-commerce development at Manomay. I'm seeking internship and full-time software engineering opportunities.",
+  "location": "Mumbai, India",
+  "role": "Software Developer | AI, Backend & Data Pipelines",
+  "education": "K.J. Somaiya College of Engineering — B.Tech in IT, Honours in AI (Aug 2023 – Present)",
+  "experience": [
     {
-      title: "Software Engineering Intern",
-      company: "Trueview",
-      location: "Aurangabad, Maharashtra",
-      period: "Dec 2025",
-      type: "current",
-      bullets: [
-        "Designed and implemented a Retrieval-Augmented Generation (RAG) architecture, utilizing semantic search and vector embeddings to optimize the retrieval of complex product specifications and reduce internal query resolution time.",
-        "Deployed a scalable AI backend integrated with a customized conversational interface, establishing secure API endpoints and robust data pipelines to ensure seamless user interaction and high-performance querying.",
-        "Coordinated with internal manufacturing and operational teams to align Large Language Model (LLM) capabilities with strategic business workflows, delivering an automated knowledge-sharing platform that significantly boosted team productivity."
+      "title": "Software Engineering Intern",
+      "company": "EmerTech Innovations",
+      "location": "",
+      "period": "Jun 2026 – Jul 2026",
+      "type": "previous",
+      "bullets": [
+        "Engineered an automated Digital Product Passport (DPP) ingestion pipeline to accelerate supplier onboarding and eliminate manual data-entry bottlenecks.",
+        "Built a workflow to parse unstructured supplier PDFs, extract and validate critical data, flag missing essential fields, and produce database-ready records."
       ]
     },
     {
-      title: "Software Engineering Intern",
-      company: "Trueview",
-      location: "Aurangabad, Maharashtra",
-      period: "May 2025 – Jul 2025",
-      type: "previous",
-      bullets: [
-        "Developed a fully functional e-commerce website for the subsidiary company, enhancing product visibility and driving a 20% increase in online sales within the first quarter.",
-        "Engineered secure login systems, real-time notifications, and a scalable backend architecture using modern web technologies to ensure seamless user experience and performance.",
-        "Collaborated cross-functionally with design, business, and product teams to align technical implementation with strategic business goals, resulting in an intuitive and conversion-optimized platform."
+      "title": "Software Engineering Intern",
+      "company": "Trueview",
+      "location": "",
+      "period": "Dec 2025 – Jan 2026",
+      "type": "previous",
+      "bullets": [
+        "Architected a RAG knowledge base using semantic search and vector embeddings to reduce query resolution time for complex CCTV specifications.",
+        "Deployed an AI backend with secure API endpoints and conversational interfaces, aligning LLM capabilities with manufacturing workflows to automate enterprise knowledge-sharing."
+      ]
+    },
+    {
+      "title": "Software Engineering Intern",
+      "company": "Manomay",
+      "location": "",
+      "period": "May 2025 – Jul 2025",
+      "type": "previous",
+      "bullets": [
+        "Built a full-stack e-commerce platform from scratch, driving a 20% increase in Q1 online sales through frontend conversion optimization and backend architecture.",
+        "Implemented secure authentication, real-time notifications, and optimized database queries for a responsive user experience."
       ]
     }
   ],
-  certifications: [
+  "certifications": [
     {
-      name: "Harvard CS50: Introduction to Computer Science",
-      issuer: "Harvard University",
-      platform: "edX",
-      status: "completed"
+      "name": "Harvard CS50: Introduction to Computer Science",
+      "issuer": "Harvard University",
+      "platform": "edX",
+      "status": "completed"
     },
     {
-      name: "Y Combinator Startup School — Startup Track",
-      issuer: "Y Combinator",
-      platform: "Startup School",
-      status: "completed"
+      "name": "Y Combinator Startup School — Startup Track",
+      "issuer": "Y Combinator",
+      "platform": "Startup School",
+      "status": "completed"
     },
     {
-      name: "Meta Full Stack Developer Professional Certificate",
-      issuer: "Meta",
-      platform: "Coursera",
-      status: "ongoing"
+      "name": "Meta Full Stack Developer Professional Certificate",
+      "issuer": "Meta",
+      "platform": "Coursera",
+      "status": "ongoing"
     },
     {
-      name: "Financial Markets",
-      issuer: "Yale University",
-      platform: "Coursera",
-      status: "completed"
+      "name": "Financial Markets",
+      "issuer": "Yale University",
+      "platform": "Coursera",
+      "status": "completed"
     },
     {
-      name: "Program Management Fundamentals",
-      issuer: "Microsoft",
-      platform: "Coursera",
-      status: "completed"
+      "name": "Program Management Fundamentals",
+      "issuer": "Microsoft",
+      "platform": "Coursera",
+      "status": "completed"
     },
     {
-      name: "Strategy and Game Theory for Management",
-      issuer: "IIM Ahmedabad",
-      platform: "Coursera",
-      status: "completed"
+      "name": "Strategy and Game Theory for Management",
+      "issuer": "IIM Ahmedabad",
+      "platform": "Coursera",
+      "status": "completed"
     }
   ],
-  projects: [
+  "projects": [
     {
-      name: "Trueview Nexus",
-      description: "An AI Chat Application featuring secure authentication and robust chat interfaces integrated with Dify API.",
-      techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "SQLite"],
-      role: "Full-Stack Developer",
-      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop",
-      category: "AI Web App",
-      year: "2026",
-      links: {
-        github: "https://github.com/yourusername/trueview-nexus",
-        live: "https://trueview-nexus.com"
+      "name": "SemanticEdge — Edge-to-Cloud Video Analytics",
+      "description": "An edge-to-cloud video analytics pipeline that filters routine frames using a FAISS-backed context firewall. YOLOv8 and ByteTrack provide detection and tracking, while SigLIP embeddings and Qdrant enable natural-language video search through a React dashboard.",
+      "techStack": [
+        "Python",
+        "C++ / FAISS",
+        "PyTorch",
+        "YOLOv8",
+        "ByteTrack",
+        "SigLIP",
+        "Qdrant",
+        "FastAPI",
+        "React",
+        "Docker"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop",
+      "category": "Computer Vision",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/SemanticEdge-Ege-to-Cloud-Video-Analytics-Pipeline"
       }
     },
     {
-      name: "SmartSpace Coworking",
-      description: "A comprehensive multi-office coworking management system with real-time availability and Role-Based Access Control.",
-      techStack: ["Next.js", "React", "Node.js", "PostgreSQL"],
-      role: "Lead Developer",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
-      category: "SaaS Platform",
-      year: "2025",
-      links: {
-        github: "https://github.com/yourusername/smartspace",
+      "name": "VStream — Vision-Language Inference Engine",
+      "description": "A real-time video pipeline combining C++/OpenCV motion filtering with local vision-language models through Ollama. Asynchronous inference produces scene descriptions while video and telemetry stream over WebSockets to a Next.js dashboard.",
+      "techStack": [
+        "Python",
+        "C++",
+        "OpenCV",
+        "FastAPI",
+        "Ollama",
+        "WebSockets",
+        "Next.js",
+        "Docker"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+      "category": "Vision-Language AI",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/VStream-Vision-Language-Inference-Engine"
       }
     },
     {
-      name: "Automated AI Security & Vulnerability Scanner",
-      description: "An automated Static Application Security Testing (SAST) pipeline using AST parsing and LLMs to identify vulnerabilities and generate context-aware remediation snippets.",
-      techStack: ["Python", "LLM APIs", "Abstract Syntax Trees (AST)", "CLI"],
-      role: "Security Engineer",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
-      category: "DevSecOps",
-      year: "2025",
-      links: {
-        github: "https://github.com/yourusername/ai-scanner"
+      "name": "Fault-Tolerant Webhook Dispatch Engine",
+      "description": "An asynchronous webhook delivery system built with Go worker pools and channels. Redis-backed queues, exponential backoff, and a dead-letter queue handle failing endpoints and isolate exhausted delivery attempts.",
+      "techStack": [
+        "Go",
+        "Redis",
+        "Docker",
+        "Concurrency",
+        "REST APIs"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
+      "category": "Backend Infrastructure",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/Fault-Tolerant-Webhook-Dispatch-Engine"
       }
     },
     {
-      name: "RAG-Powered Enterprise Knowledge System",
-      description: "A custom RAG platform with semantic search and vector embeddings to streamline access to complex manufacturing specifications.",
-      techStack: ["Python", "React", "Vector Database", "LLM APIs"],
-      role: "Full-Stack Developer",
-      image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop",
-      category: "Enterprise AI",
-      year: "2025",
-      links: {
-        github: "https://github.com/AtharvaRathi/Adaptive-Corrective-Slef-Reflective-RAG"
+      "name": "Adaptive Corrective & Self-Reflective RAG",
+      "description": "An agentic LangGraph pipeline that routes questions between hybrid FAISS/BM25 retrieval, web search, and direct answers. Document grading, query rewriting, and self-reflection check evidence and answer grounding, with citations and execution traces in Streamlit.",
+      "techStack": [
+        "Python",
+        "LangGraph",
+        "LangChain",
+        "FAISS",
+        "BM25",
+        "Groq",
+        "Streamlit"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop",
+      "category": "Agentic AI",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/Adaptive-Corrective-Self-Reflective-RAG",
+        "live": "https://adaptive-corrective-self-reflective-rag.streamlit.app/"
       }
     },
     {
-      name: "Fault-Tolerant Webhook Dispatch Engine",
-      description: "An asynchronous event-delivery system engineered with a reliable message-queuing architecture, exponential backoff, and automated retries.",
-      techStack: ["Go", "Redis", "Docker", "Concurrency"],
-      role: "Backend Engineer",
-      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop",
-      category: "Infrastructure",
-      year: "2024",
-      links: {
-        github: "https://github.com/AtharvaRathi/Fault-Tolerant-Webhook-Dispatch-Engine"
+      "name": "Shift-Aware Restricted-Zone Monitoring",
+      "description": "A B.Tech research project comparing temporal LSTM/GRU models with static classifiers for restricted-zone monitoring. YOLOv8 and ByteTrack extract trajectories; spatial and behavioral features support classification of movement patterns using track-aware evaluation and heuristic labels.",
+      "techStack": [
+        "Python",
+        "PyTorch",
+        "YOLOv8",
+        "ByteTrack",
+        "OpenCV",
+        "XGBoost",
+        "LSTM / GRU"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=800&auto=format&fit=crop",
+      "category": "Computer Vision Research",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/Shift-Aware-Spatial-Temporal-Modeling-for-Intelligent-Restricted-Zone-Monitoring"
       }
     },
     {
-      name: "Trueview CRM",
-      description: "A custom sales and support CRM developed for a manufacturing company by deploying and extensively customizing the open-source EspoCRM platform.",
-      techStack: ["EspoCRM", "PHP", "MySQL"],
-      role: "Full-Stack Developer",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-      category: "Enterprise Tool",
-      year: "2024",
-      links: {}
+      "name": "ContextShield",
+      "description": "A local context-optimization proxy for AI development tools. A FastAPI layer processes OpenAI- and Gemini-style requests, trims Python context with AST parsing, and forwards streaming responses, while a React dashboard displays optimization telemetry.",
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "AST",
+        "SSE",
+        "React",
+        "Vite",
+        "Recharts",
+        "Ollama"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+      "category": "Developer Tooling",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/ContextShield"
+      }
     },
     {
-      name: "AutoAnalyst",
-      description: "A multi-agent financial intelligence system utilizing the CrewAI framework to synthesize financial data and autonomously generate structured, actionable analytical dashboards. Deployed via Streamlit.",
-      techStack: ["Python", "CrewAI", "Streamlit", "LLMs"],
-      role: "AI Engineer",
-      image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop",
-      category: "AI Agents",
-      year: "2024",
-      links: {}
+      "name": "HeatWatch",
+      "description": "A full-stack heatwave dashboard with weather, alert, advisory, and analytics services. Includes both microservices and monolithic deployments, a MongoDB data layer, an Nginx gateway, Docker Compose, and GitHub Actions, with mock-data fallback for frontend demonstrations.",
+      "techStack": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Docker",
+        "Nginx",
+        "GitHub Actions"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop",
+      "category": "Full-Stack / DevOps",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/HeatWatch"
+      }
     },
     {
-      name: "Smart Study Planner",
-      description: "A smart study planner built from the ground up featuring a complete frontend interface and a robust backend architecture, packaged with a dedicated local hosting guide.",
-      techStack: ["MongoDB", "Express.js", "React", "Node.js"],
-      role: "Full-Stack Developer",
-      image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=800&auto=format&fit=crop",
-      category: "Web App",
-      year: "2023",
-      links: {}
+      "name": "Enterprise Text-to-SQL Platform",
+      "description": "A prototype that translates natural-language questions into SQL and visualizes query results. Combines a FastAPI/LangChain backend, schema retrieval, SQL parsing and guardrail modules with a React interface, CodeMirror editor, and Plotly charts.",
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "LangChain",
+        "SQLAlchemy",
+        "SQLGlot",
+        "ChromaDB",
+        "React",
+        "TypeScript",
+        "Plotly"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=800&auto=format&fit=crop",
+      "category": "AI Data Tools",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/Text-to-SQL-Draft"
+      }
+    },
+    {
+      "name": "SmartSpace Coworking",
+      "description": "A coworking management application built with Next.js, React, and TypeScript, using Prisma for database access and NextAuth for authentication. Supports the office-management workflows developed in the SmartSpace project.",
+      "techStack": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Prisma",
+        "NextAuth",
+        "Tailwind CSS"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop",
+      "category": "Full-Stack Application",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/smartspace-coworking",
+        "live": "https://smartspace-coworking.vercel.app"
+      }
+    },
+    {
+      "name": "Alpha — Smart Study Planner",
+      "description": "A MERN study-planning application with task management, recurring study sessions, a Pomodoro timer, notes, and productivity analytics. Includes JWT authentication, calendar scheduling, and a TypeScript frontend and backend.",
+      "techStack": [
+        "MongoDB",
+        "Express",
+        "React",
+        "Node.js",
+        "TypeScript",
+        "FullCalendar",
+        "Zustand"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+      "category": "Productivity",
+      "year": "2025",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/Alpha---Smart-Study-Planner"
+      }
+    },
+    {
+      "name": "SQL 50 — PostgreSQL Study Guide",
+      "description": "An interactive PostgreSQL study guide for the LeetCode SQL 50 plan, with concept cards, SQL execution-order explanations, a problem tracker, searchable syntax references, and visual learning tools.",
+      "techStack": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "PostgreSQL"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
+      "category": "Learning Tools",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/SQL-50"
+      }
+    },
+    {
+      "name": "YieldWise",
+      "description": "An agricultural planning prototype with crop-yield exploration, multilingual interfaces, location-based soil guidance, and cost/profit calculators. Includes demonstration data and simulated AI recommendation features.",
+      "techStack": [
+        "JavaScript",
+        "Python",
+        "HTML",
+        "CSS",
+        "Mapbox"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop",
+      "category": "Agricultural Technology",
+      "year": "2025",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/YieldWise"
+      }
     }
   ],
-  skills: {
-    frontend: ["React", "Next.js", "Tailwind CSS", "JavaScript/TypeScript", "Framer Motion", "Material-UI (MUI)"],
-    backend: ["Node.js", "Express", "Python", "Go", "Java", "C++", "RESTful APIs", "Microservices"],
-    databases: ["MongoDB", "PostgreSQL", "SQLite", "Redis", "Vector DBs"],
-    ai: ["OpenAI API", "Google Gemini", "RAG Architecture", "LangChain", "AI Agents", "Computer Vision", "LLMs"],
-    tools: ["Git/GitHub", "Docker", "Vercel", "Linux", "AWS", "InfoSec"]
+  "skills": {
+    "frontend": [
+      "JavaScript / TypeScript",
+      "React.js",
+      "Next.js",
+      "Material-UI",
+      "Tailwind CSS",
+      "Streamlit",
+      "D3.js"
+    ],
+    "backend": [
+      "Python",
+      "C++",
+      "Go",
+      "Java",
+      "Node.js",
+      "Express",
+      "FastAPI",
+      "Flask",
+      "REST APIs",
+      "WebSockets",
+      "SSE",
+      "Microservices",
+      "Go Concurrency",
+      "AST"
+    ],
+    "databases": [
+      "SQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "FAISS",
+      "Qdrant",
+      "Weaviate",
+      "Pinecone"
+    ],
+    "ai": [
+      "PyTorch",
+      "Scikit-learn",
+      "XGBoost",
+      "YOLOv4 / YOLOv8",
+      "ByteTrack",
+      "OpenCV",
+      "PaddleOCR",
+      "LangChain",
+      "LangGraph",
+      "CrewAI",
+      "RAG",
+      "LLMs / VLMs",
+      "Ollama",
+      "Qwen-VL",
+      "CLIP",
+      "SigLIP"
+    ],
+    "tools": [
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "Linux",
+      "Git / GitHub",
+      "TensorRT",
+      "CUDA",
+      "Apple MPS",
+      "GStreamer",
+      "FFmpeg",
+      "HashiCorp Vault",
+      "OpenSSL",
+      "Vercel"
+    ]
   },
-  fun: [
-    "I'm obsessed with optimizing web performance.",
-    "Always exploring the latest AI models and how to build context-aware agents.",
-    "I enjoy crafting minimal, whitespace-heavy user interfaces.",
-    "Currently building tools to automate security scanning in codebases."
+  "fun": [
+    "I build across Python, C++, Go, and React—from video pipelines to web interfaces.",
+    "I explore how edge filtering can make video analytics more efficient.",
+    "I enjoy connecting AI models to practical tools, from document ingestion to developer workflows.",
+    "My projects span computer vision, agentic retrieval, distributed backends, and learning tools."
   ],
-  contact: {
-    phone: "9370877347",
-    website: "atharvarathi.com",
-    email: "atharvarathi09@gmail.com",
-    github: "https://github.com/AtharvaRathi",
-    linkedin: "https://linkedin.com/in/atharvarathi",
-    twitter: "https://twitter.com/yourusername",
-    callToAction: "I'm currently looking for internship opportunities. Let's build something great together."
+  "contact": {
+    "phone": "+919370877347",
+    "website": "atharvarathi.com",
+    "email": "atharvarathi09@gmail.com",
+    "github": "https://github.com/AtharvaRathi",
+    "linkedin": "https://linkedin.com/in/atharvarathi",
+    "twitter": "",
+    "callToAction": "I'm seeking internship and full-time software engineering opportunities in AI, backend systems, and full-stack development. Let's connect."
   },
-  resume: {
-    summary: "Passionate Full-Stack Developer with expertise in MERN and AI integration. Proven track record in building complex management systems and security tools.",
-    downloadLink: "/resume.pdf"
+  "resume": {
+    "summary": "Software developer focused on AI, backend architecture, and data pipelines. B.Tech IT student with Honours in AI at K.J. Somaiya College of Engineering, with internships at EmerTech Innovations, Trueview, and Manomay. Projects span vision-language inference, edge video analytics, agentic RAG, and concurrent webhook delivery.",
+    "downloadLink": "/resume.pdf"
   },
-  systemPromptStyle: "Be concise, warm, sharp, and recruiter-friendly. Speak in the first person ('I', 'my') as if you are Atharva. Keep answers brief and do not use generic AI disclaimers."
+  "systemPromptStyle": "Be concise, warm, sharp, and recruiter-friendly. Speak in the first person ('I', 'my') as if you are Atharva. Keep answers brief and do not use generic AI disclaimers."
 };

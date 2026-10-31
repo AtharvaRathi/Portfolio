@@ -1,22 +1,23 @@
+import { portfolioData } from "./portfolio";
+
+// Derive repeated facts from the same source used by the widgets and AI prompt.
 export const faqs = [
-  {
-    question: "Who are you?",
-    answer: "I'm Atharva, a 3rd-year B.Tech IT student and full-stack developer passionate about AI and scalable web applications."
-  },
+  { question: "Who are you?", answer: portfolioData.about },
   {
     question: "What tech stack do you use?",
-    answer: "I primarily work with the MERN stack, Next.js, TypeScript, and Python. I also heavily integrate AI tools like the OpenAI API and LangChain."
+    answer: "My core tools are Python, C++, Go, and React. I work with FastAPI, Node.js, PyTorch, LangGraph, vector databases, and Docker across AI, backend, and full-stack projects."
+  },
+  { question: "Are you looking for opportunities?", answer: portfolioData.contact.callToAction },
+  {
+    question: "Where have you worked?",
+    answer: portfolioData.experience.map(e => `${e.title} at ${e.company} (${e.period})`).join("; ") + "."
   },
   {
-    question: "Are you looking for an internship?",
-    answer: "Yes! I'm actively looking for internship opportunities where I can apply my skills in full-stack development and AI integration."
-  },
-  {
-    question: "What are your main skills?",
-    answer: "My main skills include React, Next.js, Node.js, Python, and building AI-powered features like RAG systems."
+    question: "What are your main projects?",
+    answer: "My projects include SemanticEdge, VStream, a fault-tolerant webhook dispatch engine, adaptive corrective and self-reflective RAG, restricted-zone monitoring, and ContextShield."
   },
   {
     question: "How can I contact you?",
-    answer: "You can reach me via email at atharva@example.com or connect with me on LinkedIn and GitHub."
+    answer: `Email me at ${portfolioData.contact.email}, visit https://${portfolioData.contact.website}, or connect at ${portfolioData.contact.linkedin} and ${portfolioData.contact.github}.`
   }
 ];

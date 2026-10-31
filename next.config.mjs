@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         source: '/rag',
-        destination: 'https://github.com/AtharvaRathi/Adaptive-Corrective-Slef-Reflective-RAG',
+        destination: 'https://github.com/AtharvaRathi/Adaptive-Corrective-Self-Reflective-RAG',
         permanent: false,
       },
       {

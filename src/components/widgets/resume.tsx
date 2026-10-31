@@ -19,6 +19,7 @@ export function ResumeWidget() {
       
       <a 
         href={portfolioData.resume.downloadLink}
+        download="Atharva-Rathi-Resume.pdf"
         className="flex justify-between items-center px-5 py-3.5 bg-zinc-900 dark:bg-zinc-100 rounded-2xl hover:bg-zinc-800 dark:hover:bg-white transition-all hover:scale-[1.02] active:scale-[0.98] group shadow-md"
       >
         <span className="text-[13px] font-bold text-white dark:text-zinc-900 transition-colors duration-300">Download Full Resume</span>

@@ -71,11 +71,15 @@ export function ExperienceWidget() {
 
                 <div className="flex flex-wrap items-center gap-3 mb-5">
                   <span className="text-sm font-bold text-[#B7669A]">{exp.company}</span>
-                  <div className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-                  <span className="flex items-center gap-1 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                    <MapPin className="w-3.5 h-3.5" />
-                    {exp.location}
-                  </span>
+                  {exp.location && (
+                    <>
+                      <div className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+                      <span className="flex items-center gap-1 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                        <MapPin className="w-3.5 h-3.5" />
+                        {exp.location}
+                      </span>
+                    </>
+                  )}
                   {exp.type === "current" && (
                     <>
                       <div className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-600" />

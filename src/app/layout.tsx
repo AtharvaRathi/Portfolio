@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { portfolioData } from "@/data/portfolio";
 import { GeistSans } from 'geist/font/sans';
 import { ThemeProvider } from "@/components/theme-provider";
 import { SmoothScroll } from "@/components/smooth-scroll";
@@ -8,8 +9,10 @@ import { ToolingProvider } from "@/components/tooling-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Atharva | Portfolio",
-  description: "Personal portfolio and AI assistant for Atharva.",
+  metadataBase: new URL(`https://${portfolioData.contact.website}`),
+  title: "Atharva Rathi | Software Developer — AI & Backend Systems",
+  description: portfolioData.resume.summary,
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({
