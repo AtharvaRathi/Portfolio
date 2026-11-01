@@ -6,6 +6,7 @@ let audioCtx: AudioContext | null = null;
 
 const getContext = () => {
   if (typeof window === "undefined") return null;
+  try { if (localStorage.getItem("portfolio-sound") !== "on") return null; } catch { return null; }
   if (!audioCtx) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();

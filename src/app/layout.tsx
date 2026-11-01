@@ -1,47 +1,37 @@
 import type { Metadata } from "next";
 import { portfolioData } from "@/data/portfolio";
-import { GeistSans } from 'geist/font/sans';
+import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SmoothScroll } from "@/components/smooth-scroll";
-import { CanvasBackground } from "@/components/canvas-background";
-import { CustomCursor } from "@/components/custom-cursor";
-import { ToolingProvider } from "@/components/tooling-provider";
+import { StudioShell } from "@/components/studio/shell";
 import "./globals.css";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://${portfolioData.contact.website}`),
-  title: "Atharva Rathi | Software Developer — AI & Backend Systems",
+  metadataBase: new URL("https://atharvarathi.com"),
+  title: {
+    default: "Atharva Rathi | AI, Computer Vision & Backend Engineer",
+    template: "%s | Atharva Rathi",
+  },
   description: portfolioData.resume.summary,
   alternates: { canonical: "/" },
+  openGraph: {
+    title: "Atharva Rathi — Engineering intelligence into useful things",
+    description: portfolioData.resume.summary,
+    url: "https://atharvarathi.com",
+    type: "website",
+    images: [
+      { url: "/avatar.png", width: 1024, height: 1024, alt: "Atharva Rathi" },
+    ],
+  },
 };
-
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${GeistSans.className} text-zinc-900 dark:text-zinc-100 bg-[#fafafa] dark:bg-zinc-950 antialiased selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-zinc-900 dark:selection:text-zinc-100 overflow-x-hidden min-h-screen transition-colors duration-300`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange={false}
-        >
-          <ToolingProvider>
-            <CustomCursor />
-            <SmoothScroll>
-            {/* 3D Canvas Background */}
-            <CanvasBackground />
-            
-            {/* Vignette effect */}
-            <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-              <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(183,102,154,0.15)] dark:shadow-[inset_0_0_100px_rgba(183,102,154,0.05)] rounded-[30px] sm:rounded-[50px] m-2 sm:m-4 border border-zinc-200/50 dark:border-zinc-800/50" />
-            </div>
-            {children}
-            </SmoothScroll>
-          </ToolingProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={GeistSans.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <StudioShell>{children}</StudioShell>
         </ThemeProvider>
       </body>
     </html>

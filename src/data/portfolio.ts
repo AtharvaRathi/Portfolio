@@ -5,10 +5,10 @@ export const portfolioData = {
   "nickname": "Atharva",
   "tagline": "Building AI systems, reliable backends & data pipelines",
   "avatar": "/avatar.png",
-  "about": "I'm an Information Technology engineering student at K.J. Somaiya College of Engineering, pursuing a B.Tech with Honours in Artificial Intelligence. Based in Mumbai, I build real-time vision-language engines, edge-to-cloud video analytics, reliable backend systems, and full-stack applications. My experience spans automated document ingestion at EmerTech Innovations, enterprise RAG at Trueview, and e-commerce development at Manomay. I'm seeking internship and full-time software engineering opportunities.",
+  "about": "I'm an Information Technology engineering student at K.J. Somaiya College of Engineering, pursuing a B.Tech with Honours in Artificial Intelligence. Based in Mumbai, I build real-time vision-language engines, edge-to-cloud video analytics, reliable backend systems, and full-stack applications. My experience spans automated document ingestion at EmerTech Innovations, enterprise RAG at Trueview, and e-commerce development at Manomay. I graduate in April 2027 and am seeking onsite internships and full-time opportunities, with a focus on AI/ML, computer vision, and backend engineering. I am open to relocation.",
   "location": "Mumbai, India",
   "role": "Software Developer | AI, Backend & Data Pipelines",
-  "education": "K.J. Somaiya College of Engineering — B.Tech in IT, Honours in AI (Aug 2023 – Present)",
+  "education": "K.J. Somaiya College of Engineering — B.Tech in IT, Honours in AI (Aug 2023 – Apr 2027, expected)",
   "experience": [
     {
       "title": "Software Engineering Intern",
@@ -408,7 +408,7 @@ export const portfolioData = {
     "github": "https://github.com/AtharvaRathi",
     "linkedin": "https://linkedin.com/in/atharvarathi",
     "twitter": "",
-    "callToAction": "I'm seeking internship and full-time software engineering opportunities in AI, backend systems, and full-stack development. Let's connect."
+    "callToAction": "I'm seeking onsite internships and full-time roles in AI/ML, computer vision, and backend engineering. Expected graduation: April 2027. Open to relocation. Let's connect."
   },
   "resume": {
     "summary": "Software developer focused on AI, backend architecture, and data pipelines. B.Tech IT student with Honours in AI at K.J. Somaiya College of Engineering, with internships at EmerTech Innovations, Trueview, and Manomay. Projects span vision-language inference, edge video analytics, agentic RAG, and concurrent webhook delivery.",

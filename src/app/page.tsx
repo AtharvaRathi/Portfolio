@@ -1,138 +1,196 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { HomeView } from "@/components/home-view";
-import { ChatView } from "@/components/chat-view";
-import { portfolioData } from "@/data/portfolio";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  ArrowRight,
+  ScanLine,
+  Network,
+  Workflow,
+} from "lucide-react";
+import { portfolioData as data } from "@/data/portfolio";
+import { notes } from "@/data/editorial";
+import { AskBox } from "@/components/studio/shell";
+import { WorkGallery, Skills, RecruiterTools } from "@/components/studio/work";
+import { Playground } from "@/components/studio/playground";
 export interface Message {
   id: string;
   role: "user" | "assistant";
   content: string;
   widget?: string | null;
 }
-
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const isChatMode = messages.length > 0;
-
-  const handleAsk = async (question: string, predefinedWidget?: string) => {
-    if (!question.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: "user",
-      content: question,
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setIsLoading(true);
-
-    try {
-      const res = await fetch("/api/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question, predefinedWidget }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => null);
-        throw new Error(errorData?.error || `API Error: ${res.status}`);
-      }
-
-      const data = await res.json();
-      
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: data.answer,
-        widget: data.widget || data.relatedSection || predefinedWidget || null,
-      };
-
-      setMessages((prev) => [...prev, aiMessage]);
-    } catch (error: unknown) {
-      const err = error as Error;
-      console.error(err);
-      
-      const isRateLimit = err.message?.includes("429") || err.message?.includes("503") || err.message?.includes("Too Many Requests") || err.message?.includes("quota") || err.message?.toLowerCase().includes("high demand") || err.message?.toLowerCase().includes("service unavailable");
-      
-      let fallbackContent = isRateLimit 
-        ? "Wow, I'm getting a lot of messages right now and hit my AI rate limit! 😅 Here is some quick info, but feel free to browse the UI or contact me directly!"
-        : "Sorry, I couldn't process that right now through the AI. Here is some quick info instead!";
-      
-      const q = question.toLowerCase();
-      let widgetToShow = predefinedWidget || null;
-
-      if (!widgetToShow) {
-        if (q.includes("project")) widgetToShow = "projects";
-        else if (q.includes("skill") || q.includes("tech") || q.includes("stack")) widgetToShow = "skills";
-        else if (q.includes("experience") || q.includes("work") || q.includes("intern")) widgetToShow = "experience";
-        else if (q.includes("contact") || q.includes("email") || q.includes("reach")) widgetToShow = "contact";
-        else if (q.includes("cert")) widgetToShow = "certifications";
-        else if (q.includes("fun") || q.includes("about") || q.includes("who")) widgetToShow = "me";
-      }
-
-      if (!widgetToShow) {
-         fallbackContent = isRateLimit 
-           ? "I'm currently experiencing high traffic and my AI has hit its rate limit (429). Please try again later, or use the buttons below to navigate my portfolio!"
-           : "Sorry, I couldn't process that right now. Please try using the quick links below!";
-      }
-
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: fallbackContent,
-        widget: widgetToShow,
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <main className="relative min-h-screen flex flex-col items-center overflow-hidden w-full transition-colors duration-300">
-      {/* Top-right controls */}
-      <div className="absolute top-6 right-6 z-50 flex items-center gap-3">
-        {/* CMD+K hint */}
-        <button
-          onClick={() => {
-            const e = new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true });
-            document.dispatchEvent(e);
-          }}
-          className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-800/60 text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 transition-all shadow-sm"
-          title="Open command palette"
+    <main id="main">
+      <section className="hero shell">
+        <div className="hero-intro">
+          <p className="availability">
+            <span />
+            Open to internships & full-time roles
+          </p>
+          <h1>
+            Engineering intelligence.
+            <br />
+            <span>Into useful things.</span>
+          </h1>
+          <div className="hero-bio">
+            <Image
+              src={data.avatar}
+              width={56}
+              height={56}
+              alt="Atharva Rathi"
+              priority
+            />
+            <p>
+              I’m <strong>Atharva</strong>, a software developer building AI,
+              <br className="desktop-break" /> computer vision, and reliable
+              backend systems.
+            </p>
+          </div>
+          <AskBox />
+          <div className="hero-bottom">
+            <a href="#work">
+              Or explore my work <ArrowDown size={15} />
+            </a>
+            <span>MUMBAI, IN · OPEN TO RELOCATION</span>
+          </div>
+        </div>
+        <div
+          className="hero-visual"
+          aria-label="Engineering focus: perceive, reason, deliver"
         >
-          <span className="hidden md:inline">Search or run commands</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-mono text-[10px] border border-zinc-200 dark:border-zinc-700">⌘K</kbd>
-        </button>
-        <ThemeToggle />
+          <div className="visual-top">
+            <span>THE ENGINEERING THREAD</span>
+            <span>01—03</span>
+          </div>
+          <div className="system-node">
+            <ScanLine />
+            <div>
+              <span>01 / PERCEIVE</span>
+              <h3>Make sense of the scene.</h3>
+              <p>Computer vision · Edge intelligence</p>
+            </div>
+          </div>
+          <div className="node-connector" />
+          <div className="system-node">
+            <Network />
+            <div>
+              <span>02 / REASON</span>
+              <h3>Find evidence. Build context.</h3>
+              <p>Retrieval · Language models</p>
+            </div>
+          </div>
+          <div className="node-connector" />
+          <div className="system-node">
+            <Workflow />
+            <div>
+              <span>03 / DELIVER</span>
+              <h3>Make the system dependable.</h3>
+              <p>APIs · Queues · Data pipelines</p>
+            </div>
+          </div>
+          <div className="visual-footer">
+            <span className="online-dot" />
+            Curiosity → Code → Something useful
+          </div>
+        </div>
+      </section>
+      <div className="focus-strip">
+        <div className="shell">
+          <span>AI / ML ENGINEERING</span>
+          <span>COMPUTER VISION</span>
+          <span>BACKEND SYSTEMS</span>
+          <span>HONOURS IN AI · CLASS OF 2027</span>
+        </div>
       </div>
-
-      {/* Giant faded background text */}
-      <div className="fixed top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 opacity-[0.02] dark:opacity-[0.015] select-none text-[30vw] md:text-[25vw] font-black tracking-tighter text-zinc-900 dark:text-zinc-100 whitespace-nowrap transition-colors duration-300">
-        {portfolioData.nickname.toLowerCase()}
-      </div>
-
-      <div className="relative z-10 w-full flex-1 flex flex-col h-full max-w-4xl mx-auto px-4">
-        <AnimatePresence mode="wait">
-          {!isChatMode ? (
-            <HomeView key="home" onAsk={handleAsk} />
-          ) : (
-            <ChatView key="chat" messages={messages} isLoading={isLoading} onAsk={handleAsk} />
-          )}
-        </AnimatePresence>
-      </div>
-
-      {!isChatMode && (
-        <footer className="relative z-10 py-6 text-center text-zinc-400 text-xs w-full">
-          Powered by Next.js & Gemini
-        </footer>
-      )}
+      <WorkGallery />
+      <Playground />
+      <section id="experience" className="section shell">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">03 / EXPERIENCE</p>
+            <h2>
+              Learning by building.
+              <br />
+              <span className="muted">In real environments.</span>
+            </h2>
+          </div>
+          <p>
+            Three internships across document intelligence, enterprise
+            knowledge, and commerce.
+          </p>
+        </div>
+        <div className="timeline">
+          {data.experience.map((e, i) => (
+            <article key={e.company}>
+              <div>
+                <span className="timeline-index">0{i + 1}</span>
+                <p className="eyebrow">{e.period}</p>
+              </div>
+              <div>
+                <h3>{e.company}</h3>
+                <p className="role-title">{e.title}</p>
+              </div>
+              <ul>
+                {e.bullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <details className="certifications">
+          <summary>
+            Continuing the learning / {data.certifications.length}{" "}
+            certifications & courses <span>+</span>
+          </summary>
+          <div>
+            {data.certifications.map((c) => (
+              <article key={c.name}>
+                <h4>{c.name}</h4>
+                <p>
+                  {c.issuer} · {c.platform}
+                </p>
+                <span className="badge">{c.status}</span>
+              </article>
+            ))}
+          </div>
+        </details>
+      </section>
+      <Skills />
+      <section id="notes" className="section shell">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">05 / ENGINEERING NOTES</p>
+            <h2>
+              The thinking
+              <br />
+              <span className="muted">behind the code.</span>
+            </h2>
+          </div>
+          <p>
+            Architecture notes grounded in my repositories. Decisions,
+            limitations, and questions worth exploring.
+          </p>
+        </div>
+        <div className="notes-grid">
+          {notes.map((n, i) => (
+            <Link className="note-card" href={`/notes/${n.slug}`} key={n.slug}>
+              <div className="note-top">
+                <span>FIELD NOTE / 0{i + 1}</span>
+                <ArrowUpRight size={20} />
+              </div>
+              <p className="eyebrow">{n.tag}</p>
+              <h3>{n.title}</h3>
+              <p>{n.subtitle}</p>
+              <span className="note-read">
+                Read note <ArrowRight size={16} />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <RecruiterTools />
     </main>
   );
 }

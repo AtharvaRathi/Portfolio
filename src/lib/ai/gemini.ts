@@ -18,12 +18,13 @@ export class GeminiProvider implements AIProvider {
       systemInstruction: systemPrompt,
       generationConfig: {
         responseMimeType: "application/json",
+        maxOutputTokens: 1200,
       },
     });
 
     const prompt = `${question}\n\nReturn your response in JSON format exactly like: { "answer": "...", "relatedSection": "me" | "projects" | "skills" | "contact" | "resume" | null }`;
 
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(prompt, { timeout: 18000 });
     const response = await result.response;
     const text = response.text();
     
