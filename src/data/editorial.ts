@@ -1,19 +1,6 @@
 import { portfolioData } from "./portfolio";
 
-export const slugs = [
-  "semanticedge",
-  "vstream",
-  "webhook-engine",
-  "adaptive-rag",
-  "restricted-zone-monitoring",
-  "contextshield",
-  "heatwatch",
-  "text-to-sql",
-  "smartspace",
-  "study-planner",
-  "sql-50",
-  "yieldwise",
-];
+export const slugs = portfolioData.projects.map((project) => project.slug);
 export type CaseStudy = {
   problem: string;
   approach: string;
@@ -21,8 +8,88 @@ export type CaseStudy = {
   tradeoff: string;
   next: string;
   evidence: string;
+  validation?: string[];
+  sourceFiles?: { label: string; path: string }[];
 };
 const details: Record<string, CaseStudy> = {
+  cryptavision: {
+    problem:
+      "A monitoring dashboard often needs scene activity rather than identifiable raw footage. CryptaVision explores separating everyday semantic monitoring from a protected facial-evidence workflow.",
+    approach:
+      "A GStreamer tee feeds separate inference branches. Stream A extracts YOLOv8 pose keypoints and CLIP scene embeddings; Stream B extracts 128-dimensional FaceVAE latents for TenSEAL CKKS encryption. A custom C++ sink frames both payload types over TCP using a 9-byte CRYP header. The asynchronous receiver routes metadata to FastAPI SSE/WebSocket consumers and ciphertext to an in-memory latent store. The Next.js dashboard shows skeletons, subject counts, inference timings, and frame-driven feed health.",
+    flow: [
+      "Video / GStreamer",
+      "Pose + CLIP / face latents",
+      "Native framed TCP",
+      "FastAPI ingest",
+      "SSE dashboard / latent store",
+    ],
+    tradeoff:
+      "The semantic monitoring path has a documented working local demo. The forensic path still needs shared CKKS key provisioning, trained FaceVAE weights, and reliable face detection on Apple Silicon before end-to-end reconstruction can be validated. Stream A metadata is cleartext in the development transport and can reveal sensitive information. The implementation encrypts latents; it does not implement zero-knowledge proofs or demonstrate cloud-side homomorphic analytics.",
+    next: "Unify edge and forensic key contexts, supply compatible trained reconstruction weights, and validate the complete encrypted path before hardening authentication, transport, and persistence.",
+    evidence:
+      "Reviewed against the current README, GStreamer/AI pipeline, C++ TCP sink, asynchronous receiver, and crypto engine. The repository documents a live semantic dashboard recording and a focused 20-test regression selection on macOS/Apple Silicon. This is a development prototype; those checks do not establish forensic reconstruction or production security.",
+    validation: [
+      "Repository-documented demo: local video → edge inference → native TCP → FastAPI SSE → visible skeletons, counts, embeddings, and advancing frames.",
+      "The documented 20-test selection covers process cleanup, source resolution, segment-based looping, native packet delivery, and semantic-output compatibility; it is not a full-suite claim.",
+      "Forensic reconstruction, hardened deployment, and cross-platform performance remain unvalidated in the documented workflow.",
+    ],
+    sourceFiles: [
+      {
+        label: "Inference and dual-stream processing",
+        path: "pipeline/ai_engine.py",
+      },
+      {
+        label: "Native TCP packet sink",
+        path: "plugins/crypta_network_sink.cpp",
+      },
+      {
+        label: "Asynchronous ingest and latent store",
+        path: "cloud/tcp_receiver.py",
+      },
+      { label: "CKKS latent encryption", path: "crypto_engine.py" },
+      {
+        label: "Local validation and limitations",
+        path: "README.md#validation",
+      },
+    ],
+  },
+  "rtp-udp-streaming": {
+    problem:
+      "Real-time transport must keep making progress when datagrams arrive late, out of order, or malformed. This project exposes packet encoding, receiver resource limits, and independent telemetry directly through C++ and POSIX APIs.",
+    approach:
+      "The transmitter serializes a 12-byte RTP header explicitly and sends up to 1400 payload bytes per UDP datagram with 33 ms pacing. The receiver uses recvmsg with MSG_TRUNC detection, validates RTP lengths and fields, and reorders packets in a bounded 64-packet window. A 500 ms gap timeout and resynchronization policy prevent indefinite waiting. A separate libpcap analyzer filters traffic and parses link-layer, IPv4, UDP, and RTP headers to report loss estimates, payload throughput, and interarrival jitter.",
+    flow: [
+      "Binary media payload",
+      "RTP byte encoding",
+      "Paced UDP datagrams",
+      "Validate + bounded reorder",
+      "Output file / passive telemetry",
+    ],
+    tradeoff:
+      "Bounded buffering favors memory limits and forward progress over recovering missing data; lost or discarded payload cannot be reconstructed. The implementation uses binary chunks with simulated media timing, without codec encoding/decoding, video playback, RTCP, retransmission, congestion control, or SRTP. Telemetry is intended for a single controlled stream; source/SSRC isolation and RTP timestamp rollover handling remain future work.",
+    next: "Add per-source/SSRC isolation and timestamp rollover handling, then validate on the target Embedded Linux hardware with controlled loss and reordering.",
+    evidence:
+      "Reviewed against the current hardened README, RTP header encoder/parser, receiver, and passive analyzer. The README records Release and sanitizer-enabled Debug test passes on macOS/Apple Silicon, plus a byte-identical 2 MiB loopback demo. That loss-free run is not a delivery guarantee, maximum-throughput benchmark, or Embedded Linux validation.",
+    validation: [
+      "Repository-documented 2 MiB loopback transfer with byte-for-byte input/output comparison and managed process teardown.",
+      "Header tests cover exact wire bytes, malformed lengths, extensions, padding, and sequence arithmetic. Loopback/offline-capture tests cover truncation, reordering, duplicates, wraparound, timeouts, shutdown, and parsing.",
+      "Release and AddressSanitizer/UndefinedBehaviorSanitizer Debug test passes are documented for macOS/Apple Silicon; board-specific Embedded Linux validation remains a next step.",
+    ],
+    sourceFiles: [
+      {
+        label: "Explicit RTP wire format and packet validation",
+        path: "include/rtp_header.hpp",
+      },
+      { label: "Paced UDP transmitter", path: "src/server.cpp" },
+      { label: "Bounded jitter-buffer receiver", path: "src/client.cpp" },
+      { label: "Passive packet analyzer", path: "src/analyzer.cpp" },
+      {
+        label: "Loopback and offline capture regressions",
+        path: "tests/test_pipeline.py",
+      },
+    ],
+  },
   semanticedge: {
     problem:
       "Video archives contain repetitive footage, yet finding a particular event still requires manual review. Sending every frame to a cloud model adds bandwidth and indexing overhead.",
@@ -211,7 +278,9 @@ const additional: Record<
   },
 };
 for (const [slug, detail] of Object.entries(additional)) {
-  const project = portfolioData.projects[slugs.indexOf(slug)];
+  const project = portfolioData.projects.find(
+    (project) => project.slug === slug,
+  )!;
   details[slug] = {
     ...detail,
     approach: project.description,
@@ -219,10 +288,9 @@ for (const [slug, detail] of Object.entries(additional)) {
       "Based on the public repository inventory and project documentation. Suggested evaluations are future work, not reported benchmark results.",
   };
 }
-export const projects = portfolioData.projects.map((p, i) => ({
+export const projects = portfolioData.projects.map((p) => ({
   ...p,
-  slug: slugs[i],
-  caseStudy: details[slugs[i]] || {
+  caseStudy: details[p.slug] || {
     problem: `This project explores practical workflows in ${p.category.toLowerCase()}.`,
     approach: p.description,
     flow: [
@@ -239,6 +307,61 @@ export const projects = portfolioData.projects.map((p, i) => ({
   },
 }));
 export const notes = [
+  {
+    slug: "separating-monitoring-from-evidence",
+    title: "Separate monitoring from evidence",
+    subtitle:
+      "What two video streams change about the data a dashboard needs to see.",
+    tag: "Edge AI / Privacy",
+    minutes: 4,
+    project: "cryptavision",
+    sections: [
+      [
+        "Start with the operator’s question",
+        "A monitoring view can answer how many people are present or where they are moving using pose skeletons and counts. CryptaVision’s semantic branch produces YOLOv8 keypoints and CLIP scene embeddings at the edge, then renders metadata in a Next.js dashboard. Keeping raw frames out of that canvas changes the information exposed in the primary monitoring workflow.",
+      ],
+      [
+        "Give each stream its own job",
+        "The GStreamer tee feeds separate queued inference branches. Stream A carries semantic JSON; Stream B prepares face latents for TenSEAL CKKS encryption. Both use the native TCP sink, whose 9-byte header identifies the magic value, payload length, and type. The cloud receiver reads framed payloads before routing metadata to subscribers and ciphertext to the latent store.",
+      ],
+      [
+        "Encryption has a scope",
+        "Encrypted latents protect those numeric values, while cleartext pose, scene embeddings, and face metadata can still reveal information. The repository name includes Zero-Knowledge, but the implementation does not use a zero-knowledge proof protocol. It also does not demonstrate cloud-side homomorphic computation. Those distinctions define the current privacy boundary more precisely than a broad security label.",
+      ],
+      [
+        "Validate the whole evidence path",
+        "The local semantic dashboard is documented working. Recovering meaningful facial evidence still needs matching edge/forensic CKKS contexts, trained FaceVAE weights, and a reliable detector on the selected device. A functioning monitoring interface is therefore one validation milestone; reconstruction and production hardening remain separate work.",
+      ],
+    ],
+  },
+  {
+    slug: "a-jitter-buffer-needs-a-bound",
+    title: "A jitter buffer needs a bound",
+    subtitle:
+      "How a UDP receiver chooses between waiting, memory, and forward progress.",
+    tag: "C++ / Networking",
+    minutes: 4,
+    project: "rtp-udp-streaming",
+    sections: [
+      [
+        "Put bytes on the wire deliberately",
+        "The RTP transmitter encodes its 12-byte fixed header with shifts and masks rather than sending a C++ struct. This makes packet layout independent of host padding, bitfield allocation, and endianness. Each datagram carries up to 1400 binary payload bytes; timestamps and pacing simulate media timing rather than a codec-specific playback pipeline.",
+      ],
+      [
+        "Treat each received datagram as untrusted input",
+        "The receiver uses recvmsg to detect truncation before parsing RTP. The shared parser checks the version, configured payload type, CSRC lengths, extension lengths, and padding. A valid fixed header does not by itself establish that the rest of the packet fits inside the received buffer.",
+      ],
+      [
+        "Choose a policy for gaps",
+        "The receiver writes contiguous payload immediately and retains future packets in a 64-packet reorder window. A missing sequence is skipped after 500 ms. A packet beyond the configured window clears pending data and resynchronizes the receiver. These limits bound memory and waiting, while accepting that discarded bytes cannot be recovered without an additional reliability mechanism.",
+      ],
+      [
+        "Observe the network separately",
+        "The libpcap analyzer watches traffic independently of the sender and receiver. It reports sequence-gap loss estimates, payload throughput, and interarrival jitter. Duplicate arrivals and mixed SSRCs can distort its simple single-stream model; offline throughput reflects replay processing speed. The documented loss-free loopback comparison demonstrates that run’s byte integrity, not a general UDP delivery guarantee.",
+      ],
+    ],
+  },
+
   {
     slug: "video-has-two-clocks",
     title: "A live video system has two clocks",

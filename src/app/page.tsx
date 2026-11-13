@@ -86,7 +86,7 @@ export default function Home() {
             <div>
               <span>03 / DELIVER</span>
               <h3>Make the system dependable.</h3>
-              <p>APIs · Queues · Data pipelines</p>
+              <p>APIs · Queues · Network transport</p>
             </div>
           </div>
           <div className="visual-footer">

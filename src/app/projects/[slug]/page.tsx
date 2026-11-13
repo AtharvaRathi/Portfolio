@@ -55,6 +55,26 @@ export default function Project({ params }: { params: { slug: string } }) {
               Visit project <ArrowUpRight size={16} />
             </a>
           )}
+          {p.links.demo && (
+            <a
+              className="secondary"
+              href={p.links.demo}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Watch recorded demo <ArrowUpRight size={16} />
+            </a>
+          )}
+          {p.links.screenshot && (
+            <a
+              className="secondary"
+              href={p.links.screenshot}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View demo screenshot <ArrowUpRight size={16} />
+            </a>
+          )}
           <AskButton
             project={p.slug}
             question={`Explain the architecture and tradeoffs of ${p.name}.`}
@@ -67,7 +87,9 @@ export default function Project({ params }: { params: { slug: string } }) {
       <div className="detail-image">
         <Image src={p.image} alt="" fill unoptimized sizes="100vw" />
         <span>
-          Illustrative stock imagery · Project screenshots coming later
+          {p.links.screenshot
+            ? "Illustrative stock imagery · See the demo screenshot for actual project output"
+            : "Illustrative stock imagery · Project screenshots coming later"}
         </span>
       </div>
       <div className="detail-grid">
@@ -121,6 +143,38 @@ export default function Project({ params }: { params: { slug: string } }) {
               added in a later update.
             </p>
           </section>
+          {c.validation && (
+            <section className="project-validation">
+              <p className="eyebrow">VALIDATION / REPOSITORY EVIDENCE</p>
+              <h2>What has been checked</h2>
+              <ul>
+                {c.validation.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="validation-attribution">
+                Validation is reported by the linked repository and scoped to
+                its documented environment.
+              </p>
+            </section>
+          )}
+          {c.sourceFiles && (
+            <section>
+              <p className="eyebrow">FOLLOW THE IMPLEMENTATION</p>
+              {c.sourceFiles.map((source) => (
+                <a
+                  className="related-note"
+                  key={source.path}
+                  href={`${p.links.github}/blob/main/${source.path}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {source.label}
+                  <ArrowUpRight size={18} />
+                </a>
+              ))}
+            </section>
+          )}
           {related.map((n) => (
             <Link
               className="related-note"

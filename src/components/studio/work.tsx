@@ -5,23 +5,16 @@ import Image from "next/image";
 import { ArrowUpRight, ArrowRight, Sparkles } from "lucide-react";
 import { mentionsTechnology } from "@/lib/evidence";
 import { projects } from "@/data/editorial";
+import {
+  projectFilters,
+  projectsForFilter,
+  type ProjectFilter,
+} from "@/lib/projects";
 import { AskButton } from "./shell";
 export function WorkGallery() {
-  const [filter, setFilter] = useState("Selected");
+  const [filter, setFilter] = useState<ProjectFilter>("Selected");
   const [all, setAll] = useState(false);
-  const groups = ["Selected", "AI & ML", "Computer vision", "Backend", "All"];
-  const visible = projects
-    .filter(
-      (p) =>
-        filter === "Selected" ||
-        filter === "All" ||
-        (filter === "Computer vision"
-          ? /vision|video|zone|heatwatch/i.test(p.name)
-          : filter === "AI & ML"
-            ? /rag|sql|contextshield|semantic|vstream|yield/i.test(p.slug)
-            : /webhook|smartspace|planner|sql/i.test(p.slug)),
-    )
-    .slice(0, all || filter !== "Selected" ? 12 : 4);
+  const visible = projectsForFilter(filter, all);
   return (
     <section id="work" className="section shell">
       <div className="section-heading">
@@ -34,12 +27,13 @@ export function WorkGallery() {
           </h2>
         </div>
         <p>
-          From understanding video to delivering events reliably. Explore the
-          architecture, decisions, and source behind each build.
+          From edge video intelligence to packet transport and reliable
+          backends. Explore the architecture, decisions, and source behind each
+          build.
         </p>
       </div>
       <div className="filter-row" aria-label="Filter projects">
-        {groups.map((g) => (
+        {projectFilters.map((g) => (
           <button
             key={g}
             aria-pressed={filter === g}
@@ -123,6 +117,14 @@ export function Skills() {
     "Docker",
     "PostgreSQL",
     "LangGraph",
+    "GStreamer",
+    "CLIP",
+    "TenSEAL",
+    "POSIX sockets",
+    "RTP",
+    "UDP",
+    "libpcap",
+    "CMake",
   ];
   const [selected, setSelected] = useState("Python");
   const matches = projects.filter((p) =>
@@ -190,6 +192,18 @@ export function RecruiterTools() {
     "PyTorch",
     "Java",
     "GraphQL",
+    "GStreamer",
+    "CLIP",
+    "TenSEAL",
+    "CKKS",
+    "HashiCorp Vault",
+    "POSIX sockets",
+    "RTP",
+    "UDP",
+    "libpcap",
+    "CMake",
+    "CTest",
+    "AddressSanitizer",
   ];
   const requested = terms.filter((t) => mentionsTechnology(jd, t));
   return (

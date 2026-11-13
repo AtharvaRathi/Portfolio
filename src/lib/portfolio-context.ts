@@ -1,4 +1,5 @@
 import { portfolioData } from "@/data/portfolio";
+import { projects } from "@/data/editorial";
 import { faqs } from "@/data/faqs";
 
 export function buildSystemPrompt() {
@@ -23,17 +24,20 @@ Role: ${portfolioData.role}
 Education: ${portfolioData.education}
 
 Experience:
-${portfolioData.experience.map(e =>
-  `- ${e.title} at ${e.company} ${e.location ? `(${e.location})` : ""} | ${e.period}\n${e.bullets.map(b => `  • ${b}`).join("\n")}`
-).join("\n\n")}
+${portfolioData.experience
+  .map(
+    (e) =>
+      `- ${e.title} at ${e.company} ${e.location ? `(${e.location})` : ""} | ${e.period}\n${e.bullets.map((b) => `  • ${b}`).join("\n")}`,
+  )
+  .join("\n\n")}
 
 Certifications:
-${portfolioData.certifications.map(c =>
-  `- ${c.name} | ${c.issuer} via ${c.platform} [${c.status}]`
-).join("\n")}
+${portfolioData.certifications
+  .map((c) => `- ${c.name} | ${c.issuer} via ${c.platform} [${c.status}]`)
+  .join("\n")}
 
 Projects:
-${portfolioData.projects.map(p => `- ${p.name}: ${p.description} (Role: ${p.role}, Tech: ${p.techStack.join(", ")}) | Links: ${Object.values(p.links).join(", ")}`).join("\n")}
+${projects.map((p) => `- ${p.name}: ${p.description} (Role: ${p.role}, Tech: ${p.techStack.join(", ")}) | Links: ${Object.values(p.links).join(", ")}\n  Architecture: ${p.caseStudy.approach}\n  Tradeoffs and current scope: ${p.caseStudy.tradeoff}\n  Evidence: ${p.caseStudy.evidence}`).join("\n\n")}
 
 Skills:
 - Frontend: ${portfolioData.skills.frontend.join(", ")}
@@ -43,7 +47,7 @@ Skills:
 - Tools: ${portfolioData.skills.tools.join(", ")}
 
 Fun Facts:
-${portfolioData.fun.map(f => `- ${f}`).join("\n")}
+${portfolioData.fun.map((f) => `- ${f}`).join("\n")}
 
 Contact Info:
 Website: https://${portfolioData.contact.website}
@@ -58,7 +62,7 @@ Resume: https://${portfolioData.contact.website}${portfolioData.resume.downloadL
 Availability: ${portfolioData.contact.callToAction}
 
 Common FAQs:
-${faqs.map(f => `Q: ${f.question}\nA: ${f.answer}`).join("\n\n")}
+${faqs.map((f) => `Q: ${f.question}\nA: ${f.answer}`).join("\n\n")}
 
 --- OUTPUT FORMAT ---
 You must return your response in JSON format exactly like this:

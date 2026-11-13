@@ -1815,7 +1815,38 @@ textarea {
     scroll-behavior: auto !important;
   }
 }
-@keyframes settle-in {from {opacity:0;transform:translateY(6px)} to {opacity:1;transform:translateY(0)}}
-@media (prefers-reduced-motion:no-preference) {
-  .assistant-dialog[open] .assistant-inner,.fit-results,.chat-message,.project-card {animation:settle-in .24s ease-out both}
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .assistant-dialog[open] .assistant-inner,
+  .fit-results,
+  .chat-message,
+  .project-card {
+    animation: settle-in 0.24s ease-out both;
+  }
+}
+
+.project-validation ul {
+  padding-left: 20px;
+  color: var(--muted);
+  line-height: 1.85;
+}
+.detail-grid > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.project-validation li + li {
+  margin-top: 14px;
+}
+.project-validation .validation-attribution {
+  margin-top: 18px;
+  font-size: 12px;
 }

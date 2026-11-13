@@ -1,51 +1,82 @@
 import { portfolioData } from "@/data/portfolio";
 import { projects } from "@/data/editorial";
+import { projectsForFilter } from "@/lib/projects";
 export type Turn = { role: "user" | "assistant"; content: string };
 export type Source = { label: string; href: string };
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
+function mentionsProject(text: string, project: (typeof projects)[number]) {
+  const query = ` ${normalize(text)} `;
+  return [
+    project.slug,
+    project.name,
+    project.name.split(" — ")[0],
+    ...project.aliases,
+  ].some((name) => query.includes(` ${normalize(name)} `));
+}
+
 export function answerFromPortfolio(
   question: string,
   projectSlug?: string,
   history: Turn[] = [],
 ) {
   const q = question.toLowerCase();
-  const explicit = projects.find(
-    (p) =>
-      q.includes(p.slug) ||
-      q.includes(p.name.toLowerCase()) ||
-      q.includes(p.name.split(" — ")[0].toLowerCase()),
-  );
+  const explicit = projects.filter((p) => mentionsProject(question, p));
   const contextual =
     projects.find((p) => p.slug === projectSlug) ||
     [...history]
       .reverse()
-      .map((t) =>
-        projects.find((p) =>
-          t.content.toLowerCase().includes(p.name.toLowerCase()),
-        ),
-      )
+      .map((turn) => projects.find((p) => mentionsProject(turn.content, p)))
       .find(Boolean);
-  const project =
-    explicit ||
-    (/\b(it|its|this|that|architecture|tradeoffs?|stack|built|limitations?|technology)\b/.test(
-      q,
-    )
-      ? contextual
-      : undefined);
-  if (project) {
-    const wantsTradeoffs = /tradeoff|limitation|challenge/.test(q);
-    const wantsArchitecture = /architecture|how|built|work/.test(q);
-    const explanation = [
-      wantsArchitecture ? project.caseStudy.approach : !wantsTradeoffs ? project.description : '',
-      wantsTradeoffs ? project.caseStudy.tradeoff : '',
-    ].filter(Boolean).join('\n\n');
+  const relevant = explicit.length
+    ? explicit
+    : /\b(it|its|this|that|architecture|tradeoffs?|stack|built|limitations?|technology|scope)\b/.test(
+          q,
+        ) && contextual
+      ? [contextual]
+      : [];
+  if (relevant.length) {
+    const wantsTradeoffs =
+      /tradeoff|limitation|challenge|production|secure|privacy|zero.knowledge|forensic|reconstruct|playback|scope/.test(
+        q,
+      );
+    const wantsArchitecture = /architecture|how|built|work|pipeline/.test(q);
     return {
-      answer: `${project.name}\n\n${explanation}\n\nTechnologies: ${project.techStack.join(", ")}.`,
-      sources: [
-        { label: project.name, href: `/projects/${project.slug}` },
-        { label: "Source repository", href: project.links.github },
-      ],
+      answer: relevant
+        .slice(0, 3)
+        .map((project) => {
+          const explanation = [
+            wantsArchitecture
+              ? project.caseStudy.approach
+              : !wantsTradeoffs
+                ? project.description
+                : "",
+            wantsTradeoffs ? project.caseStudy.tradeoff : "",
+          ]
+            .filter(Boolean)
+            .join("\n\n");
+          return `${project.name}\n\n${explanation}\n\nTechnologies: ${project.techStack.join(", ")}.`;
+        })
+        .join("\n\n"),
+      sources: relevant.slice(0, 3).flatMap((p) => [
+        { label: p.name, href: `/projects/${p.slug}` },
+        { label: `${p.name.split(" — ")[0]} source`, href: p.links.github },
+      ]),
     };
   }
+  if (
+    /contact|email|reach|hire|relocat|onsite|available|availability|roles|looking for|opportunit|graduat|education/.test(
+      q,
+    )
+  )
+    return {
+      answer: `${portfolioData.contact.callToAction}\n\n${portfolioData.education}\n${portfolioData.contact.email}`,
+      sources: [{ label: "Quick overview & contact", href: "/#recruiters" }],
+    };
   if (/experience|intern|worked|employer/.test(q))
     return {
       answer: portfolioData.experience
@@ -56,18 +87,6 @@ export function answerFromPortfolio(
         .join("\n\n"),
       sources: [{ label: "Experience", href: "/#experience" }],
     };
-  if (
-    /contact|email|reach|hire|relocat|onsite|available|availability|roles|looking for|opportunit|graduat|education/.test(
-      q,
-    )
-  )
-    return {
-      answer: `${portfolioData.contact.callToAction}\n\n${portfolioData.education}\n${portfolioData.contact.email}`,
-      sources: [
-        { label: "Quick overview", href: "/#recruiters" },
-        { label: "Contact", href: "/#recruiters" },
-      ],
-    };
   if (/certif|certificate|courses/.test(q))
     return {
       answer: portfolioData.certifications
@@ -75,22 +94,39 @@ export function answerFromPortfolio(
         .join("\n"),
       sources: [{ label: "Certifications", href: "/#experience" }],
     };
-  if (/resume|résumé|cv\b/.test(q))
+  if (/resume|résumé|\bcv\b/.test(q))
     return {
       answer: portfolioData.resume.summary,
       sources: [{ label: "Download résumé", href: "/resume.pdf" }],
     };
   if (/skill|stack|language/.test(q))
     return {
-      answer: `My work spans Python, C++, Go, and React. I use PyTorch, OpenCV, LangGraph, FastAPI, vector databases, and Docker across AI, computer vision, and backend projects. Explore the skills section to see the projects behind each technology.`,
-      sources: [{ label: "Skills with evidence", href: "/#skills" }],
+      answer:
+        "My core languages are Python, C++, and Go, with React/Next.js for interfaces. My projects use PyTorch, GStreamer, FastAPI, LangGraph, vector databases, and Docker. CryptaVision adds TenSEAL CKKS and native TCP transport; the RTP/UDP server demonstrates POSIX sockets, libpcap, bounded buffering, and packet validation. Explore the skills section for project evidence.",
+      sources: [
+        { label: "Skills with evidence", href: "/#skills" },
+        { label: "CryptaVision", href: "/projects/cryptavision" },
+        { label: "RTP/UDP server", href: "/projects/rtp-udp-streaming" },
+      ],
     };
-  if (/project|vision|backend|best|strong|\bai\b|fit/.test(q)) {
-    const picks = /backend/.test(q)
-      ? [projects[2], projects[5], projects[6]]
-      : /vision/.test(q)
-        ? [projects[0], projects[1], projects[4]]
-        : [projects[0], projects[1], projects[3]];
+  if (
+    /project|vision|backend|network|systems|streaming|\brtp\b|\budp\b|encrypt|best|strong|\bai\b|fit|latest|newest|recent/.test(
+      q,
+    )
+  ) {
+    const picks = /latest|newest|recent|\bnew\b/.test(q)
+      ? projects.slice(0, 2)
+      : /network|systems|\brtp\b|\budp\b|streaming/.test(q)
+        ? ["rtp-udp-streaming", "cryptavision", "vstream"].map((slug) =>
+            projects.find((p) => p.slug === slug)!,
+          )
+        : projectsForFilter(
+            /backend/.test(q)
+              ? "Backend"
+              : /vision/.test(q)
+                ? "Computer vision"
+                : "AI & ML",
+          ).slice(0, 3);
     return {
       answer: picks.map((p) => `${p.name}\n${p.description}`).join("\n\n"),
       sources: picks.map((p) => ({
@@ -99,7 +135,7 @@ export function answerFromPortfolio(
       })),
     };
   }
-  if (/hello|hi\b|intro|who|about|yourself/.test(q))
+  if (/hello|\bhi\b|intro|who|about|yourself/.test(q))
     return {
       answer: portfolioData.about,
       sources: [{ label: "Profile overview", href: "/#recruiters" }],

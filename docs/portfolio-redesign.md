@@ -6,8 +6,8 @@ Implemented November 2026 in the existing Next.js / GitHub / Vercel application.
 
 - AI-led landing page with suggested prompts and a persistent conversational assistant.
 - Direct navigation for visitors who want to browse; project-specific AI entry points.
-- Twelve project pages with architecture flows, tradeoffs, source links, and evaluation questions.
-- Three engineering notes based on documented implementations. No new benchmark results or personal contribution stories are asserted.
+- Fourteen project pages with architecture flows, tradeoffs, source links, and evaluation questions.
+- Five engineering notes based on documented implementations. No new benchmark results or personal contribution stories are asserted.
 - Three free browser demos: webhook delivery/recovery, keyword retrieval with source inspection, and curated safer-code examples. These are educational simulations, not hosted versions of the repositories.
 - Filterable project gallery and technology-to-project evidence explorer.
 - Recruiter overview: AI/ML, computer vision, then backend; internships and full-time; onsite preferred; relocation welcome; Aug 2023–Apr 2027 education.
@@ -23,6 +23,7 @@ Implemented November 2026 in the existing Next.js / GitHub / Vercel application.
 - `src/components/studio/work.tsx`: project filtering, skills evidence, recruiter tools.
 - `src/components/studio/playground.tsx`: demo UI.
 - `src/lib/playground.ts`: deterministic delivery and retrieval behavior.
+- `src/lib/projects.ts`: explicit category filtering and featured selection without a project-count limit.
 - `src/lib/evidence.ts`: technology boundary matching (Go does not match MongoDB).
 - `src/lib/assistant.ts`: deterministic portfolio fallback with project context.
 - `src/app/api/ask/route.ts`: input validation, conversation context, Gemini/fallback routing.
@@ -53,3 +54,11 @@ VStream and SemanticEdge follow repository documentation over conflicting résum
 - Browser interaction checks: mobile menu; light/dark; assistant intro and project context; Escape dismissal; webhook DLQ/replay; retrieval; safer-code inspection; role evidence with an unknown technology; project and note navigation.
 - Browser layout checks: 320, 390, 768, 1440, and 1920px; no page-level horizontal overflow in tested states. Project/article pages also checked at 320px. These are viewport checks, not physical-device certification.
 - Live Gemini generation is not exercised by local-mode tests; existing provider quota/credentials still apply.
+
+## November 13, 2026 project update
+
+CryptaVision and the Custom RTP/UDP Video Streaming Server & Packet Analyzer are featured throughout the gallery, case-study routes, source/demo links, engineering notes, skills evidence, recruiter matching, FAQs, and AI knowledge. Both have source-file references and explicitly attributed repository validation summaries.
+
+Project slugs now live alongside their factual records rather than in a positional array. AI selections use categories and stable identifiers; named references recognize common RTP/UDP spelling variants and preserve conversational follow-up context. The new Systems & networking filter provides a direct route into native video and transport work. All 14 projects remain accessible through All and the expanded selection.
+
+The two new notes are `separating-monitoring-from-evidence` and `a-jitter-buffer-needs-a-bound`. CryptaVision is presented as a working semantic-monitoring prototype with unfinished forensic reconstruction; the RTP project is presented as binary transport with simulated media timing. Neither receives an unsupported security, playback, or target-device claim.

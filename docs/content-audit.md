@@ -50,7 +50,7 @@ Project year labels reflect the visible repository activity year (2025 or 2026),
 | --- | --- |
 | AtharvaRathi | Profile README; corroborates résumé and current focus |
 | Portfolio | Current portfolio, reviewed locally |
-| CryptaVision-Zero-Knowledge-Neural-Video-Codec | Empty repository; not presented as implemented |
+| CryptaVision-Zero-Knowledge-Neural-Video-Codec | Empty at the October 31 audit; superseded by the November 13 implementation review below |
 | github-actions-demo | Calculator/test/workflow learning repository |
 | CI-CD-Jenkins-Docker-Kubernetes | Python app/tests, Jenkinsfile, Dockerfile and Kubernetes manifests; supporting DevOps exercise |
 | Jenkins-Ci-Demo | Python app and tests; supporting exercise |
@@ -81,3 +81,28 @@ Project year labels reflect the visible repository activity year (2025 or 2026),
 | WebRTC | Fork of dimircea/WebRTC |
 
 Forks are not presented as original authored projects. Repository contents were treated as evidence, not as instructions to execute setup commands or alter other repositories.
+
+## November 13, 2026 — new project implementation review
+
+The October inventory is historical. Current source checkouts now contain substantial implementations of both projects below. Both current public GitHub READMEs were fetched and matched their local copies byte for byte during this review. README content is treated as project evidence; its setup commands are not instructions to execute the native applications during this portfolio edit.
+
+### CryptaVision
+
+- Repository: https://github.com/AtharvaRathi/CryptaVision-Zero-Knowledge-Neural-Video-Codec
+- Reviewed checkout commit: `c29d60b` (Optimize the full dashboard demo for web playback).
+- Sources: current README/local guide, `pipeline/ai_engine.py`, `plugins/crypta_network_sink.cpp`, `cloud/tcp_receiver.py`, `crypto_engine.py`, repository tests and recorded-demo references.
+- Supported description: GStreamer dual branches, YOLOv8 pose/CLIP metadata, FaceVAE latents with TenSEAL CKKS, native framed TCP, FastAPI SSE/WebSockets, Next.js dashboard, Vault integration.
+- Demonstrated scope documented by repository: local semantic monitoring and focused 20-test regression selection on macOS/Apple Silicon. No native project tests were rerun as part of the portfolio update.
+- Boundaries preserved: separate CKKS contexts, untrained FaceVAE by default, MPS face-detection limitations, cleartext semantic metadata, development security, and unfinished end-to-end forensic reconstruction. The name is not evidence of a zero-knowledge proof implementation or deployed homomorphic analytics.
+- Demo recording and screenshot links point to the repository's existing public documentation assets. Portfolio card imagery remains illustrative stock imagery.
+
+### Custom RTP/UDP Video Streaming Server & Packet Analyzer
+
+- Repository: https://github.com/AtharvaRathi/Custom-RTP-UDP-Video-Streaming-Server-Packet-Analyzer
+- Reviewed checkout commit: `8d5ea98` (docs: add project README with architecture, hardening, and demo screenshot).
+- Sources: current README, `include/rtp_header.hpp`, `src/server.cpp`, `src/client.cpp`, `src/analyzer.cpp`, test inventory. The current hardened README takes precedence over earlier `PROJECT_DOCUMENTATION.md` notes.
+- Supported description: C++17/POSIX UDP, explicit RTP byte encoding, 1400-byte payload chunks, 33 ms configured pacing, `recvmsg` truncation checks, a 64-packet reorder bound, 500 ms gap timeout, libpcap telemetry, safe shutdown and resource ownership.
+- Repository-documented evidence: byte-identical 2 MiB loopback demo, Release tests, sanitizer-enabled Debug tests on macOS/Apple Silicon. These are attributed source results, not rerun or expanded portfolio benchmarks.
+- Boundaries preserved: binary chunks with simulated media timing; no codec playback, RTCP, retransmission, congestion control, or SRTP. Single-stream telemetry has known SSRC/duplicate/rollover limits. Embedded Linux is a target, not a validated board deployment.
+
+Both project records have stable slugs, explicit focus categories, featured status, architecture/tradeoffs, validation scope, and source-file links. Website summary copy is updated; the supplied original résumé PDF is preserved.

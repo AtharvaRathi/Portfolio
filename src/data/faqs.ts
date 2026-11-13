@@ -5,19 +5,27 @@ export const faqs = [
   { question: "Who are you?", answer: portfolioData.about },
   {
     question: "What tech stack do you use?",
-    answer: "My core tools are Python, C++, Go, and React. I work with FastAPI, Node.js, PyTorch, LangGraph, vector databases, and Docker across AI, backend, and full-stack projects."
+    answer:
+      "My core tools are Python, C++, Go, and React. I work with FastAPI, Node.js, PyTorch, GStreamer, POSIX sockets, RTP/UDP, libpcap, TenSEAL CKKS, LangGraph, vector databases, and Docker across AI, backend, and full-stack projects.",
   },
-  { question: "Are you looking for opportunities?", answer: portfolioData.contact.callToAction },
+  {
+    question: "Are you looking for opportunities?",
+    answer: portfolioData.contact.callToAction,
+  },
   {
     question: "Where have you worked?",
-    answer: portfolioData.experience.map(e => `${e.title} at ${e.company} (${e.period})`).join("; ") + "."
+    answer:
+      portfolioData.experience
+        .map((e) => `${e.title} at ${e.company} (${e.period})`)
+        .join("; ") + ".",
   },
   {
     question: "What are your main projects?",
-    answer: "My projects include SemanticEdge, VStream, a fault-tolerant webhook dispatch engine, adaptive corrective and self-reflective RAG, restricted-zone monitoring, and ContextShield."
+    answer:
+      "My projects include CryptaVision, a custom RTP/UDP streaming server and packet analyzer, SemanticEdge, VStream, a fault-tolerant webhook dispatch engine, adaptive corrective and self-reflective RAG, restricted-zone monitoring, and ContextShield.",
   },
   {
     question: "How can I contact you?",
-    answer: `Email me at ${portfolioData.contact.email}, visit https://${portfolioData.contact.website}, or connect at ${portfolioData.contact.linkedin} and ${portfolioData.contact.github}.`
-  }
+    answer: `Email me at ${portfolioData.contact.email}, visit https://${portfolioData.contact.website}, or connect at ${portfolioData.contact.linkedin} and ${portfolioData.contact.github}.`,
+  },
 ];

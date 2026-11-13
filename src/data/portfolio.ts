@@ -1,11 +1,11 @@
-// Content reviewed against the supplied résumé and public GitHub repositories on 2026-10-31.
-// See docs/content-audit.md for sources and unresolved evidence gaps.
+// Profile reviewed against the supplied résumé; project inventory updated 2026-11-13.
+// See docs/content-audit.md for sources and implementation boundaries.
 export const portfolioData = {
   "name": "Atharva Rathi",
   "nickname": "Atharva",
-  "tagline": "Building AI systems, reliable backends & data pipelines",
+  "tagline": "Building AI, video intelligence & reliable systems",
   "avatar": "/avatar.png",
-  "about": "I'm an Information Technology engineering student at K.J. Somaiya College of Engineering, pursuing a B.Tech with Honours in Artificial Intelligence. Based in Mumbai, I build real-time vision-language engines, edge-to-cloud video analytics, reliable backend systems, and full-stack applications. My experience spans automated document ingestion at EmerTech Innovations, enterprise RAG at Trueview, and e-commerce development at Manomay. I graduate in April 2027 and am seeking onsite internships and full-time opportunities, with a focus on AI/ML, computer vision, and backend engineering. I am open to relocation.",
+  "about": "I'm an Information Technology engineering student at K.J. Somaiya College of Engineering, pursuing a B.Tech with Honours in Artificial Intelligence. Based in Mumbai, I build privacy-focused edge video intelligence, real-time vision-language engines, custom RTP/UDP transport, reliable backends, and full-stack applications. My experience spans automated document ingestion at EmerTech Innovations, enterprise RAG at Trueview, and e-commerce development at Manomay. I graduate in April 2027 and am seeking onsite internships and full-time opportunities, with a focus on AI/ML, computer vision, and backend engineering. I am open to relocation.",
   "location": "Mumbai, India",
   "role": "Software Developer | AI, Backend & Data Pipelines",
   "education": "K.J. Somaiya College of Engineering — B.Tech in IT, Honours in AI (Aug 2023 – Apr 2027, expected)",
@@ -84,6 +84,86 @@ export const portfolioData = {
   ],
   "projects": [
     {
+      "slug": "cryptavision",
+      "name": "CryptaVision — Privacy-Focused Edge Video Intelligence",
+      "description": "A dual-stream surveillance prototype that extracts YOLOv8 pose skeletons and CLIP scene embeddings at the edge, then delivers telemetry through a native C++ TCP sink to a FastAPI/Next.js dashboard. A separate TenSEAL CKKS path encrypts face latents; end-to-end forensic reconstruction remains under development.",
+      "techStack": [
+        "Python",
+        "C++",
+        "GStreamer",
+        "PyTorch",
+        "YOLOv8",
+        "CLIP",
+        "TenSEAL",
+        "CKKS",
+        "FastAPI",
+        "SSE",
+        "Next.js",
+        "HashiCorp Vault"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
+      "category": "Computer Vision / Applied Cryptography",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/CryptaVision-Zero-Knowledge-Neural-Video-Codec",
+        "demo": "https://github.com/user-attachments/assets/4e149811-c149-46bb-b91e-a7cf2b2a66f9",
+        "screenshot": "https://github.com/AtharvaRathi/CryptaVision-Zero-Knowledge-Neural-Video-Codec/blob/main/docs/assets/dashboard.png"
+      },
+      "focus": [
+        "AI & ML",
+        "Computer vision",
+        "Backend",
+        "Systems & networking"
+      ],
+      "featured": true,
+      "aliases": [
+        "CryptaVision",
+        "Crypta Vision"
+      ]
+    },
+    {
+      "slug": "rtp-udp-streaming",
+      "name": "Custom RTP/UDP Video Streaming Server & Packet Analyzer",
+      "description": "A C++17 transport system built directly on POSIX UDP sockets and libpcap. An explicit RTP encoder, validating receiver, and bounded 64-packet jitter buffer handle binary payload delivery, while a passive analyzer reports loss estimates, throughput, and jitter. The demo uses simulated media timing rather than decoded video playback.",
+      "techStack": [
+        "C++",
+        "C++17",
+        "POSIX sockets",
+        "RTP",
+        "UDP",
+        "libpcap",
+        "CMake",
+        "Ninja",
+        "CTest",
+        "AddressSanitizer",
+        "UndefinedBehaviorSanitizer"
+      ],
+      "role": "Software Developer",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
+      "category": "Systems / Network Programming",
+      "year": "2026",
+      "links": {
+        "github": "https://github.com/AtharvaRathi/Custom-RTP-UDP-Video-Streaming-Server-Packet-Analyzer",
+        "screenshot": "https://github.com/AtharvaRathi/Custom-RTP-UDP-Video-Streaming-Server-Packet-Analyzer/blob/main/docs/images/demo-macos.png"
+      },
+      "focus": [
+        "Backend",
+        "Systems & networking"
+      ],
+      "featured": true,
+      "aliases": [
+        "Custom RTP UDP Video Streaming Server",
+        "RTP/UDP",
+        "RTP UDP",
+        "RTP server",
+        "UDP server",
+        "RTP streaming",
+        "UDP streaming",
+        "packet analyzer"
+      ]
+    },
+    {
       "name": "SemanticEdge — Edge-to-Cloud Video Analytics",
       "description": "An edge-to-cloud video analytics pipeline that filters routine frames using a FAISS-backed context firewall. YOLOv8 and ByteTrack provide detection and tracking, while SigLIP embeddings and Qdrant enable natural-language video search through a React dashboard.",
       "techStack": [
@@ -104,7 +184,15 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/SemanticEdge-Ege-to-Cloud-Video-Analytics-Pipeline"
-      }
+      },
+      "slug": "semanticedge",
+      "focus": [
+        "AI & ML",
+        "Computer vision",
+        "Systems & networking"
+      ],
+      "featured": true,
+      "aliases": []
     },
     {
       "name": "VStream — Vision-Language Inference Engine",
@@ -125,7 +213,15 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/VStream-Vision-Language-Inference-Engine"
-      }
+      },
+      "slug": "vstream",
+      "focus": [
+        "AI & ML",
+        "Computer vision",
+        "Systems & networking"
+      ],
+      "featured": true,
+      "aliases": []
     },
     {
       "name": "Fault-Tolerant Webhook Dispatch Engine",
@@ -143,7 +239,14 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/Fault-Tolerant-Webhook-Dispatch-Engine"
-      }
+      },
+      "slug": "webhook-engine",
+      "focus": [
+        "Backend",
+        "Systems & networking"
+      ],
+      "featured": true,
+      "aliases": []
     },
     {
       "name": "Adaptive Corrective & Self-Reflective RAG",
@@ -164,7 +267,13 @@ export const portfolioData = {
       "links": {
         "github": "https://github.com/AtharvaRathi/Adaptive-Corrective-Self-Reflective-RAG",
         "live": "https://adaptive-corrective-self-reflective-rag.streamlit.app/"
-      }
+      },
+      "slug": "adaptive-rag",
+      "focus": [
+        "AI & ML"
+      ],
+      "featured": true,
+      "aliases": []
     },
     {
       "name": "Shift-Aware Restricted-Zone Monitoring",
@@ -184,7 +293,14 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/Shift-Aware-Spatial-Temporal-Modeling-for-Intelligent-Restricted-Zone-Monitoring"
-      }
+      },
+      "slug": "restricted-zone-monitoring",
+      "focus": [
+        "AI & ML",
+        "Computer vision"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "ContextShield",
@@ -205,7 +321,14 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/ContextShield"
-      }
+      },
+      "slug": "contextshield",
+      "focus": [
+        "AI & ML",
+        "Backend"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "HeatWatch",
@@ -225,7 +348,13 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/HeatWatch"
-      }
+      },
+      "slug": "heatwatch",
+      "focus": [
+        "Backend"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "Enterprise Text-to-SQL Platform",
@@ -247,7 +376,14 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/Text-to-SQL-Draft"
-      }
+      },
+      "slug": "text-to-sql",
+      "focus": [
+        "AI & ML",
+        "Backend"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "SmartSpace Coworking",
@@ -267,7 +403,13 @@ export const portfolioData = {
       "links": {
         "github": "https://github.com/AtharvaRathi/smartspace-coworking",
         "live": "https://smartspace-coworking.vercel.app"
-      }
+      },
+      "slug": "smartspace",
+      "focus": [
+        "Backend"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "Alpha — Smart Study Planner",
@@ -287,7 +429,13 @@ export const portfolioData = {
       "year": "2025",
       "links": {
         "github": "https://github.com/AtharvaRathi/Alpha---Smart-Study-Planner"
-      }
+      },
+      "slug": "study-planner",
+      "focus": [
+        "Backend"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "SQL 50 — PostgreSQL Study Guide",
@@ -304,7 +452,13 @@ export const portfolioData = {
       "year": "2026",
       "links": {
         "github": "https://github.com/AtharvaRathi/SQL-50"
-      }
+      },
+      "slug": "sql-50",
+      "focus": [
+        "Backend"
+      ],
+      "featured": false,
+      "aliases": []
     },
     {
       "name": "YieldWise",
@@ -322,7 +476,13 @@ export const portfolioData = {
       "year": "2025",
       "links": {
         "github": "https://github.com/AtharvaRathi/YieldWise"
-      }
+      },
+      "slug": "yieldwise",
+      "focus": [
+        "AI & ML"
+      ],
+      "featured": false,
+      "aliases": []
     }
   ],
   "skills": {
@@ -349,7 +509,10 @@ export const portfolioData = {
       "SSE",
       "Microservices",
       "Go Concurrency",
-      "AST"
+      "AST",
+      "POSIX sockets",
+      "RTP",
+      "UDP"
     ],
     "databases": [
       "SQL",
@@ -377,7 +540,8 @@ export const portfolioData = {
       "Ollama",
       "Qwen-VL",
       "CLIP",
-      "SigLIP"
+      "SigLIP",
+      "FaceVAE"
     ],
     "tools": [
       "Docker",
@@ -392,14 +556,22 @@ export const portfolioData = {
       "FFmpeg",
       "HashiCorp Vault",
       "OpenSSL",
-      "Vercel"
+      "Vercel",
+      "TenSEAL",
+      "CKKS",
+      "libpcap",
+      "CMake",
+      "Ninja",
+      "CTest",
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
     ]
   },
   "fun": [
     "I build across Python, C++, Go, and React—from video pipelines to web interfaces.",
     "I explore how edge filtering can make video analytics more efficient.",
     "I enjoy connecting AI models to practical tools, from document ingestion to developer workflows.",
-    "My projects span computer vision, agentic retrieval, distributed backends, and learning tools."
+    "My projects connect computer vision, applied cryptography, packet-level networking, agentic retrieval, and backend systems."
   ],
   "contact": {
     "phone": "+919370877347",
@@ -411,7 +583,7 @@ export const portfolioData = {
     "callToAction": "I'm seeking onsite internships and full-time roles in AI/ML, computer vision, and backend engineering. Expected graduation: April 2027. Open to relocation. Let's connect."
   },
   "resume": {
-    "summary": "Software developer focused on AI, backend architecture, and data pipelines. B.Tech IT student with Honours in AI at K.J. Somaiya College of Engineering, with internships at EmerTech Innovations, Trueview, and Manomay. Projects span vision-language inference, edge video analytics, agentic RAG, and concurrent webhook delivery.",
+    "summary": "Software developer focused on AI, computer vision, backend architecture, and systems programming. B.Tech IT student with Honours in AI at K.J. Somaiya College of Engineering, with internships at EmerTech Innovations, Trueview, and Manomay. Projects include CryptaVision, custom RTP/UDP transport, vision-language inference, edge video analytics, agentic RAG, and concurrent webhook delivery.",
     "downloadLink": "/resume.pdf"
   },
   "systemPromptStyle": "Be concise, warm, sharp, and recruiter-friendly. Speak in the first person ('I', 'my') as if you are Atharva. Keep answers brief and do not use generic AI disclaimers."
